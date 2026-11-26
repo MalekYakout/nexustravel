@@ -1,0 +1,26 @@
+{
+  "protocol": "open-agentic-web/1.0",
+  "nanda_compliance": {
+    "portable": true,
+    "inspectable": true,
+    "execution_environment": "isolated-web-worker-sandbox"
+  },
+  "agent": {
+    "id": "did:web:nexustravel.openweb:orchestrator",
+    "name": "NexusTravel Autonomous Mesh Orchestrator",
+    "version": "3.1.0",
+    "role": "coordinator",
+    "peer_policy": "open",
+    "supported_verticals": ["travel", "compute"],
+    "transport": "MessageChannel/JSON-RPC-2.0",
+    "trust_boundary": {
+      "requires_user_approval_for_handoff": true,
+      "private_context_filtered": ["payment_credentials", "passport_number", "ssh_private_keys", "llm_api_keys"],
+      "max_negotiation_rounds": 3
+    }
+  },
+  "webmcp": {
+    "tool_name": "negotiate_agentic_mesh_bundle",
+    "entrypoint": "./index.html"
+  }
+}

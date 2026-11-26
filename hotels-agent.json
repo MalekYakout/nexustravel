@@ -1,0 +1,36 @@
+{
+  "protocol": "open-agentic-web/1.0",
+  "vertical": "travel",
+  "nanda_compliance": {
+    "portable": true,
+    "inspectable": true,
+    "execution_environment": "isolated-web-worker-sandbox"
+  },
+  "agent": {
+    "id": "did:web:nexustravel.openweb:agents:staysmart",
+    "name": "StaySmart Hospitality Agent",
+    "version": "3.1.0",
+    "role": "hotels",
+    "front_man": "inventory_yield_negotiator",
+    "peer_policy": "open",
+    "trust_boundary": {
+      "requires_user_approval_for_handoff": true,
+      "private_context_filtered": ["payment_credentials", "passport_number"],
+      "max_negotiation_rounds": 3
+    }
+  },
+  "pricing_model": {
+    "kind": "travel_hotels",
+    "nightly_base_usd": {
+      "saver": 85,
+      "balanced": 165,
+      "luxury": 360
+    },
+    "length_of_stay_discount_per_night_pct": 1.2,
+    "max_autonomous_discount_pct": 18
+  },
+  "handoff": {
+    "provider_name": "Expedia",
+    "url_template": "https://www.expedia.com/Hotel-Search?destination={CITY}"
+  }
+}

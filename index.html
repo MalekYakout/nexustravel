@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexusTravel — Open Agentic Web Protocol Runtime</title>
+  <link rel="agent-manifest" type="application/json" href="./nexustravel.agent.json" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "NexusTravel — Open Agentic Web Protocol Runtime",
+    "applicationCategory": "AgenticWebProtocolRuntime",
+    "operatingSystem": "Web Browser",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "./index.html?autoRun=true&origin={origin}&destination={destination}&days={days}&tier={tier}",
+      "query-input": "required name=destination"
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root,
+    [data-theme="dark"] {
+      --bg-deep: #050814;
+      --bg-indigo: #0c1326;
+      --bg-end: #070b1a;
+      --nav-bg: rgba(5, 8, 20, 0.86);
+      --glass-bg: rgba(13, 20, 38, 0.78);
+      --card-bg: rgba(17, 25, 48, 0.72);
+      --summary-bg: rgba(8, 13, 28, 0.84);
+      --input-bg: rgba(12, 19, 38, 0.94);
+      --panel-bg: #090f20;
+      --glass-border: rgba(148, 163, 184, 0.16);
+      --glass-highlight: rgba(255, 255, 255, 0.08);
+      --row-border: rgba(255, 255, 255, 0.06);
+      --track-bg: rgba(255, 255, 255, 0.1);
+      --ghost-bg: rgba(255, 255, 255, 0.05);
+      --ghost-hover: rgba(255, 255, 255, 0.11);
+      --accent: #6366f1;
+      --accent-cyan: #22d3ee;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-secondary: #e2e8f0;
+      --text-muted: #94a3b8;
+      --hero-grad: linear-gradient(135deg, #ffffff 12%, #38bdf8 55%, #a5b4fc 100%);
+      --card-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
+      --item-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      --pill-bg: rgba(99, 102, 241, 0.2);
+      --pill-text: #c7d2fe;
+      --pill-em-bg: rgba(16, 185, 129, 0.18);
+      --pill-em-text: #6ee7b7;
+      --pill-am-bg: rgba(245, 158, 11, 0.2);
+      --pill-am-text: #fcd34d;
+      --radius: 20px;
+    }
+
+    [data-theme="light"] {
+      --bg-deep: #edf2f9;
+      --bg-indigo: #e2e8f0;
+      --bg-end: #f8fafc;
+      --nav-bg: rgba(255, 255, 255, 0.9);
+      --glass-bg: rgba(255, 255, 255, 0.88);
+      --card-bg: #ffffff;
+      --summary-bg: #f8fafc;
+      --input-bg: #ffffff;
+      --panel-bg: #ffffff;
+      --glass-border: rgba(15, 23, 42, 0.1);
+      --glass-highlight: rgba(255, 255, 255, 0.9);
+      --row-border: rgba(15, 23, 42, 0.08);
+      --track-bg: rgba(15, 23, 42, 0.11);
+      --ghost-bg: rgba(15, 23, 42, 0.04);
+      --ghost-hover: rgba(15, 23, 42, 0.09);
+      --accent: #4f46e5;
+      --accent-cyan: #0284c7;
+      --accent-emerald: #059669;
+      --accent-amber: #d97706;
+      --accent-rose: #e11d48;
+      --text-main: #0f172a;
+      --text-secondary: #1e293b;
+      --text-muted: #475569;
+      --hero-grad: linear-gradient(135deg, #0f172a 15%, #4f46e5 58%, #0284c7 100%);
+      --card-shadow: 0 24px 60px rgba(15, 23, 42, 0.09);
+      --item-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+      --pill-bg: rgba(79, 70, 229, 0.1);
+      --pill-text: #4338ca;
+      --pill-em-bg: rgba(5, 150, 105, 0.12);
+      --pill-em-text: #047857;
+      --pill-am-bg: rgba(217, 119, 6, 0.12);
+      --pill-am-text: #b45309;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(99, 102, 241, 0.18), transparent 42%),
+        radial-gradient(circle at 88% 18%, rgba(34, 211, 238, 0.14), transparent 44%),
+        radial-gradient(circle at 50% 95%, rgba(16, 185, 129, 0.08), transparent 45%),
+        linear-gradient(145deg, var(--bg-deep) 0%, var(--bg-indigo) 55%, var(--bg-end) 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.55;
+      overflow-x: hidden;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    code, pre, textarea.mono, .mono {
+      font-family: 'JetBrains Mono', monospace;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 24px;
+      background: var(--nav-bg);
+      -webkit-backdrop-filter: blur(22px);
+      backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-logo {
+      width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-cyan));
+      display: grid; place-items: center; font-weight: 800; font-size: 1.15rem; color: #ffffff;
+      box-shadow: 0 0 28px rgba(99, 102, 241, 0.42);
+    }
+
+    .brand-title { font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
+    .live-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--accent-emerald);
+      box-shadow: 0 0 10px var(--accent-emerald); display: inline-block; animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(1.25); } }
+
+    .brand-badge {
+      font-size: 0.72rem; color: var(--accent-cyan); background: rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.28); padding: 2px 9px; border-radius: 999px; font-weight: 600; display: inline-block;
+    }
+
+    .nav-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+    .control-pill, select, input[type="text"], input[type="password"], input[type="url"] {
+      background: var(--input-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      border-radius: 10px;
+      padding: 7px 11px;
+      font-size: 0.81rem;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+      max-width: 100%;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    #langSelect { max-width: 185px; text-overflow: ellipsis; }
+    input[type="text"], input[type="password"], input[type="url"] { cursor: text; }
+    .control-pill:hover, select:hover, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
+
+    .voice-input-wrap { position: relative; display: flex; align-items: center; width: 100%; }
+    .voice-input-wrap input { width: 100%; padding-inline-end: 44px !important; }
+
+    .mic-btn {
+      position: absolute; inset-inline-end: 6px; width: 32px; height: 32px; border-radius: 8px;
+      border: 1px solid var(--glass-border); background: var(--ghost-bg); color: var(--accent-cyan);
+      display: grid; place-items: center; cursor: pointer; font-size: 0.95rem; transition: all 0.2s ease; z-index: 2;
+    }
+    .mic-btn:hover { background: rgba(34, 211, 238, 0.16); border-color: var(--accent-cyan); }
+    .mic-btn.recording, .control-pill.recording {
+      background: rgba(244, 63, 94, 0.22) !important; border-color: var(--accent-rose) !important; color: var(--accent-rose) !important;
+      animation: micPulse 1.1s infinite;
+    }
+    @keyframes micPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.45); } 50% { box-shadow: 0 0 0 7px rgba(244, 63, 94, 0); } }
+
+    .voice-toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: #090f20; color: #f8fafc; border: 1px solid var(--accent-cyan);
+      padding: 10px 18px; border-radius: 999px; font-size: 0.84rem; font-weight: 600;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45); z-index: 100; display: none; align-items: center; gap: 8px; max-width: 92vw;
+    }
+    .voice-toast.show { display: flex; }
+
+    .btn {
+      cursor: pointer; border: none; border-radius: 12px; padding: 11px 18px; font-weight: 600; font-size: 0.9rem;
+      font-family: inherit; line-height: 1.3; text-align: center;
+      transition: transform 0.16s ease, box-shadow 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
+    }
+    .btn:disabled { opacity: 0.65; cursor: not-allowed; }
+    .btn:active:not(:disabled) { transform: scale(0.98); }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), #4f46e5); color: #fff; box-shadow: 0 8px 25px rgba(99, 102, 241, 0.32); }
+    .btn-primary:hover:not(:disabled) { box-shadow: 0 12px 34px rgba(99, 102, 241, 0.5); transform: translateY(-1px); }
+    .btn-cyan { background: linear-gradient(135deg, #22d3ee, #0284c7); color: #04101f; font-weight: 700; box-shadow: 0 8px 22px rgba(34, 211, 238, 0.25); }
+    .btn-cyan:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(34, 211, 238, 0.4); }
+    .btn-emerald { background: linear-gradient(135deg, #10b981, #059669); color: #ffffff; font-weight: 700; box-shadow: 0 8px 22px rgba(16, 185, 129, 0.28); }
+    .btn-amber { background: linear-gradient(135deg, #f59e0b, #d97706); color: #04101f; font-weight: 700; }
+    .btn-ghost { background: var(--ghost-bg); color: var(--text-main); border: 1px solid var(--glass-border); }
+    .btn-ghost:hover:not(:disabled) { background: var(--ghost-hover); }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 28px 20px 64px; }
+    .progress-wrap { margin-bottom: 24px; display: none; }
+    .progress-wrap.active { display: block; }
+    .progress-meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; }
+    .progress-track { height: 7px; background: var(--track-bg); border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-cyan), var(--accent-emerald)); transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+
+    .glass-card {
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(22px);
+      backdrop-filter: blur(22px);
+      border: 1px solid var(--glass-border);
+      box-shadow: inset 0 1px 0 0 var(--glass-highlight), var(--card-shadow);
+      border-radius: var(--radius);
+      padding: 34px;
+    }
+
+    .wizard-step { display: none; animation: slideFadeIn 0.36s cubic-bezier(0.16, 1, 0.3, 1); }
+    .wizard-step.active { display: block; }
+    @keyframes slideFadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+    .gradient-text { background: var(--hero-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    h1 { font-size: clamp(1.75rem, 3.4vw, 2.6rem); font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 14px; }
+    h2 { font-size: clamp(1.3rem, 2.3vw, 1.8rem); font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+    .subtitle { color: var(--text-muted); font-size: 0.96rem; margin-bottom: 22px; max-width: 820px; }
+
+    .vertical-switcher {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .vertical-tab {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: start;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-main);
+      font-family: inherit;
+    }
+    .vertical-tab:hover { border-color: var(--accent); }
+    .vertical-tab.active {
+      border-color: var(--accent-cyan);
+      background: rgba(34, 211, 238, 0.1);
+      box-shadow: 0 0 0 1.5px var(--accent-cyan);
+    }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+
+    .route-input-row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: end; margin-bottom: 16px; }
+    .swap-btn {
+      width: 44px; height: 44px; border-radius: 12px; background: var(--card-bg); border: 1px solid var(--glass-border);
+      color: var(--accent-cyan); font-size: 1.15rem; font-weight: 700; cursor: pointer; display: grid; place-items: center;
+      box-shadow: var(--item-shadow); transition: transform 0.25s ease, border-color 0.2s ease;
+    }
+    .swap-btn:hover { border-color: var(--accent-cyan); transform: rotate(180deg); }
+
+    .flight-radar-card {
+      background: var(--summary-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 14px 20px;
+      margin-bottom: 22px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr);
+      align-items: center; gap: 12px; direction: ltr;
+    }
+    .radar-endpoint { display: flex; flex-direction: column; min-width: 0; }
+    .radar-iata { font-size: 1.5rem; font-weight: 800; letter-spacing: 0.04em; color: var(--text-main); }
+
+    .intent-bar { background: var(--summary-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 16px; margin-bottom: 24px; }
+    .intent-input-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .preset-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .chip-btn {
+      background: var(--ghost-bg); border: 1px solid var(--glass-border); color: var(--text-muted); font-family: inherit;
+      border-radius: 999px; padding: 5px 12px; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease;
+    }
+    .chip-btn:hover { border-color: var(--accent-cyan); color: var(--text-main); background: rgba(34, 211, 238, 0.1); }
+
+    .select-card {
+      background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 15px; padding: 18px;
+      cursor: pointer; min-width: 0; box-shadow: var(--item-shadow); transition: all 0.22s ease; position: relative;
+    }
+    .select-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .select-card.selected {
+      border-color: var(--accent-cyan); background: rgba(34, 211, 238, 0.09);
+      box-shadow: 0 0 0 1.5px var(--accent-cyan), 0 14px 30px rgba(34, 211, 238, 0.16);
+    }
+
+    .pill-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      padding: 3px 8px; border-radius: 6px; background: var(--pill-bg); color: var(--pill-text); margin-bottom: 8px;
+    }
+    .pill-emerald { background: var(--pill-em-bg); color: var(--pill-em-text); }
+    .pill-amber { background: var(--pill-am-bg); color: var(--pill-am-text); }
+
+    .sig-receipt-pill {
+      display: inline-flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 0.71rem; font-weight: 600;
+      padding: 5px 9px; border-radius: 8px; background: rgba(16, 185, 129, 0.1);
+      border: 1px dashed rgba(16, 185, 129, 0.42); color: var(--accent-emerald); margin-bottom: 10px; width: 100%;
+    }
+
+    .concession-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+      margin-top: 10px;
+      text-align: start;
+    }
+    .concession-table th, .concession-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--row-border);
+    }
+    .concession-table th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.72rem;
+    }
+
+    input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: var(--track-bg); border-radius: 999px; outline: none; margin: 18px 0; }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent)); cursor: pointer; border: 2px solid #fff;
+      box-shadow: 0 0 16px rgba(34, 211, 238, 0.5);
+    }
+    input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-cyan), var(--accent)); cursor: pointer; border: 2px solid #fff; }
+
+    .wizard-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--glass-border); }
+    .agent-status { font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; display: inline-block; }
+    .status-IDLE { background: rgba(148, 163, 184, 0.2); color: var(--text-muted); }
+    .status-SCANNING { background: var(--pill-am-bg); color: var(--pill-am-text); }
+    .status-NEGOTIATING { background: var(--pill-bg); color: var(--pill-text); }
+    .status-LOCKED { background: var(--pill-em-bg); color: var(--pill-em-text); }
+
+    .flow-banner {
+      background: rgba(34, 211, 238, 0.09); border: 1px solid rgba(34, 211, 238, 0.28); border-radius: 12px;
+      padding: 10px 16px; margin: 16px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 0.82rem; direction: ltr;
+    }
+
+    .mesh-visual-box { background: var(--summary-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 10px; margin-bottom: 16px; text-align: center; direction: ltr; }
+    .mesh-line { stroke: var(--glass-border); stroke-width: 2; transition: stroke 0.3s ease; }
+    .mesh-line.active { stroke: #22d3ee; stroke-dasharray: 6 4; animation: dashFlow 0.8s linear infinite; }
+    .mesh-line.locked { stroke: #10b981; stroke-dasharray: none; }
+    @keyframes dashFlow { to { stroke-dashoffset: -20; } }
+
+    .boarding-pass {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.14), rgba(16, 185, 129, 0.1));
+      border: 1px solid rgba(34, 211, 238, 0.32); border-radius: 18px; padding: 20px; margin-top: 20px; position: relative; overflow: hidden;
+    }
+    .boarding-pass-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 18px; align-items: center; }
+
+    .auto-heal-banner {
+      background: rgba(245, 158, 11, 0.14); border: 1px solid rgba(245, 158, 11, 0.45); border-radius: 14px;
+      padding: 14px 18px; margin-top: 16px; display: none; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+
+    .savings-bar-track { height: 12px; border-radius: 999px; background: var(--track-bg); overflow: hidden; display: flex; margin: 12px 0 8px; }
+    .seg-flights { background: #6366f1; height: 100%; transition: width 0.5s ease; }
+    .seg-hotels { background: #22d3ee; height: 100%; transition: width 0.5s ease; }
+    .seg-activities { background: #10b981; height: 100%; transition: width 0.5s ease; }
+    .seg-custom { background: #f59e0b; height: 100%; transition: width 0.5s ease; }
+
+    .terminal {
+      background: #040711; border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 14px; padding: 16px;
+      height: 230px; overflow-y: auto; font-size: 0.77rem; color: #cbd5e1; margin-top: 16px; direction: ltr; text-align: left;
+    }
+    .log-line { margin-bottom: 6px; line-height: 1.45; }
+    .log-actor { color: #22d3ee; font-weight: 600; }
+    .log-round { color: #fbbf24; font-weight: 700; }
+
+    .summary-box { background: var(--summary-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; margin-top: 20px; }
+    .stat-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--row-border); font-size: 0.92rem; }
+    .stat-row:last-child { border-bottom: none; }
+
+    .receipt-bar {
+      margin-top: 14px; padding: 10px 14px; border-radius: 10px; background: rgba(16, 185, 129, 0.08);
+      border: 1px dashed rgba(16, 185, 129, 0.38); font-size: 0.76rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: center;
+    }
+
+    .drawer-backdrop { position: fixed; inset: 0; background: rgba(2, 6, 23, 0.72); z-index: 60; display: none; justify-content: flex-end; }
+    .drawer-backdrop.open { display: flex; }
+    .drawer-panel { width: min(620px, 95vw); height: 100%; background: var(--panel-bg); border-inline-start: 1px solid var(--glass-border); padding: 24px; overflow-y: auto; }
+
+    .manifest-pre {
+      background: #040711; border: 1px solid var(--glass-border); border-radius: 10px; padding: 12px;
+      font-size: 0.74rem; overflow-x: auto; color: #a5b4fc; margin-top: 8px; margin-bottom: 14px; direction: ltr; text-align: left;
+    }
+
+    textarea.wire-editor {
+      width: 100%; height: 185px; background: #040711; color: #38bdf8; border: 1px solid var(--glass-border);
+      border-radius: 10px; padding: 12px; font-size: 0.76rem; resize: vertical; direction: ltr; text-align: left;
+    }
+
+    .llm-popover {
+      display: none; background: var(--panel-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 16px;
+      position: fixed; top: 68px; inset-inline-end: 24px; z-index: 50; width: min(370px, 92vw); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+    .llm-popover.open { display: block; }
+
+    @media (max-width: 820px) {
+      .grid-3, .vertical-switcher { grid-template-columns: 1fr; }
+      .flight-radar-card, .boarding-pass-grid { grid-template-columns: 1fr; text-align: center; }
+    }
+    @media (max-width: 640px) {
+      .navbar { padding: 12px 16px; }
+      .glass-card { padding: 20px; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .route-input-row { grid-template-columns: 1fr; }
+      .swap-btn { width: 100%; height: 38px; }
+      .wizard-footer { flex-direction: column-reverse; align-items: stretch; }
+      .wizard-footer .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="voice-toast" id="voiceToast">
+    <span>🌐</span>
+    <span id="voiceToastText" data-i18n="listening">Listening...</span>
+  </div>
+
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-logo">N</div>
+      <div>
+        <div class="brand-title">NexusTravel <span class="live-dot" title="Isolated Worker Mesh Online"></span></div>
+        <span class="brand-badge" data-i18n="badge">Open Agentic Web Protocol • Isolated Web Worker A2A Mesh</span>
+      </div>
+    </div>
+
+    <div class="nav-controls">
+      <button class="control-pill" id="btnGlobalVoiceStep" type="button" title="Control any step with your voice">
+        🎙️ <span data-i18n="voiceControl">Voice Control</span>
+      </button>
+
+      <button class="control-pill" id="btnOpenManifests" type="button">
+        📄 <span id="manifestCountLabel">Inspect Manifests (4)</span>
+      </button>
+
+      <button class="control-pill" id="btnToggleLlm" type="button">
+        🔑 <span id="llmStatusText" data-i18n="llmDet">LLM: Deterministic</span>
+      </button>
+
+      <button class="control-pill" id="btnToggleTheme" type="button" aria-label="Toggle color theme">
+        ☀️ Light
+      </button>
+
+      <select id="currencySelect" aria-label="Currency">
+        <option value="USD">USD ($)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="GBP">GBP (£)</option>
+        <option value="AED">AED</option>
+        <option value="SAR">SAR</option>
+        <option value="EGP">EGP</option>
+        <option value="JPY">JPY (¥)</option>
+        <option value="INR">INR (₹)</option>
+        <option value="CNY">CNY (¥)</option>
+        <option value="KRW">KRW (₩)</option>
+        <option value="TRY">TRY (₺)</option>
+        <option value="BRL">BRL (R$)</option>
+      </select>
+
+      <select id="langSelect" aria-label="Language"></select>
+    </div>
+  </header>
+
+  <!-- Active LLM Negotiation Engine Key Popover -->
+  <div class="llm-popover" id="llmPopover">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <strong style="font-size:0.9rem;" data-i18n="llmPopoverTitle">Active LLM Negotiation Engine</strong>
+      <button class="btn btn-ghost" id="btnCloseLlm" style="padding:4px 9px; font-size:0.75rem;">✕</button>
+    </div>
+    <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:10px;" data-i18n="llmPopoverDesc">
+      Supports Mozilla Otari or OpenAI keys client-side. Drives Round 2 counter-bidding &amp; trade-offs across isolated Web Workers.
+    </p>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <select id="llmProviderSelect">
+        <option value="otari">Mozilla Otari API (api.otari.ai)</option>
+        <option value="openai">OpenAI API (api.openai.com)</option>
+      </select>
+      <input type="password" id="llmKeyInput" placeholder="sk-... or otari-..." />
+      <button class="btn btn-primary" id="btnSaveLlm" style="padding:8px 14px; font-size:0.82rem;" data-i18n="llmSaveBtn">Activate LLM Negotiator</button>
+    </div>
+  </div>
+
+  <!-- NANDA Offer Token Verification Modal / Drawer -->
+  <div class="drawer-backdrop" id="tokenVerifyDrawer">
+    <div class="drawer-panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <span class="pill-tag pill-emerald" data-i18n="tokenPill">NANDA Cryptographic Offer Token Inspector</span>
+          <h3 data-i18n="tokenTitle">Verifiable Handoff Token Audit</h3>
+        </div>
+        <button class="btn btn-ghost" id="btnCloseTokenDrawer" style="padding:6px 12px;">✕</button>
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;" data-i18n="tokenDesc">
+        Decoded ?a2a_offer_token= parameter embedded in the provider checkout URL, binding the peer DID, locked USD amount, discount %, and SHA-256 quote receipt:
+      </p>
+      <div id="tokenVerifyStatusBadge" class="pill-tag pill-emerald" style="margin-bottom:10px;" data-i18n="tokenVerifiedBadge">✓ BASE64URL PAYLOAD &amp; SHA-256 SIGNATURE VERIFIED</div>
+      <pre class="manifest-pre" id="tokenVerifyOutput"></pre>
+    </div>
+  </div>
+
+  <!-- Live A2A Wire Inspector Drawer -->
+  <div class="drawer-backdrop" id="wireDrawer">
+    <div class="drawer-panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <span class="pill-tag pill-emerald" data-i18n="wirePill">Cross-Agent postMessage &amp; WebMCP</span>
+          <h3 data-i18n="wireTitle">Live A2A Wire Inspector</h3>
+        </div>
+        <button class="btn btn-ghost" id="btnCloseWireDrawer" style="padding:6px 12px;">✕</button>
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;" data-i18n="wireDesc">
+        Edit or dispatch a real NEXUSTRAVEL_A2A_REQUEST payload from an external personal assistant and inspect the live JSON-RPC worker receipt:
+      </p>
+
+      <strong style="font-size:0.8rem; color:var(--accent-cyan);" data-i18n="wireOutboundLabel">1. Outbound External Agent Request Payload:</strong>
+      <textarea id="wireRequestEditor" class="wire-editor mono" style="margin-top:6px; margin-bottom:10px;">{
+  "type": "NEXUSTRAVEL_A2A_REQUEST",
+  "requestId": "otari-peer-req-884",
+  "caller_did": "did:web:user-assistant.otari:agent",
+  "payload": {
+    "origin": "Cairo",
+    "destination": "Tokyo",
+    "days": 6,
+    "tier": "balanced",
+    "addon": "highlights",
+    "budgetUsd": 2150
+  }
+}</textarea>
+
+      <button class="btn btn-cyan" id="btnDispatchWirePayload" style="width:100%; margin-bottom:16px;" data-i18n="wireDispatchBtn">
+        ⚡ Dispatch A2A Request &amp; Execute Live
+      </button>
+
+      <strong style="font-size:0.8rem; color:var(--accent-emerald);" data-i18n="wireInboundLabel">2. Live NEXUSTRAVEL_A2A_RESPONSE Receipt:</strong>
+      <pre class="manifest-pre" id="wireResponseOutput" style="max-height:320px; overflow-y:auto;">// Waiting for A2A dispatch...</pre>
+    </div>
+  </div>
+
+  <!-- Live Manifest Inspector & Dynamic Open-Web Agent Discovery Drawer -->
+  <div class="drawer-backdrop" id="manifestDrawer">
+    <div class="drawer-panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <span class="pill-tag">NANDA &amp; Open Agentic Web v1.0</span>
+          <h3 data-i18n="manifestDrawerTitle">Public Agent Manifests</h3>
+        </div>
+        <button class="btn btn-ghost" id="btnCloseManifests" style="padding:6px 12px;">✕</button>
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;" data-i18n="manifestDrawerDesc">
+        Each peer manifest below is instantiated inside an isolated Blob Web Worker sandbox over MessageChannel JSON-RPC 2.0.
+      </p>
+
+      <div class="summary-box" style="margin-top:0; margin-bottom:18px; padding:14px;">
+        <strong style="font-size:0.85rem; display:block; margin-bottom:6px;" data-i18n="discoveryTitle">🔌 Dynamic Open-Web Agent Discovery</strong>
+        <p style="font-size:0.76rem; color:var(--text-muted); margin-bottom:10px;" data-i18n="discoveryDesc">
+          Plug any external HTTPS *.agent.json URL into the live worker mesh—or load a 4th open-web Carbon &amp; SLA agent:
+        </p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+          <div class="voice-input-wrap" style="flex:1; min-width:180px;">
+            <input type="url" id="customAgentUrlInput" placeholder="https://example.com/custom-agent.json" />
+            <button type="button" class="mic-btn" data-voice-target="customAgentUrlInput" title="Dictate URL">🎙️</button>
+          </div>
+          <button class="btn btn-primary" id="btnLoadCustomUrl" style="padding:7px 12px; font-size:0.78rem;" data-i18n="fetchUrlBtn">Fetch URL</button>
+        </div>
+        <button class="btn btn-cyan" id="btnInjectEcoAgent" style="width:100%; padding:8px 12px; font-size:0.8rem;" data-i18n="plugEcoBtn">
+          + Plug In 4th Open Agent (EcoShield Carbon &amp; Protection)
+        </button>
+        <div id="customAgentFeedback" style="font-size:0.75rem; color:var(--accent-emerald); margin-top:6px;"></div>
+      </div>
+
+      <div id="manifestListContainer"></div>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-meta">
+        <span id="progressLabel">1 / 7</span>
+        <span id="weatherBadge">Telemetry: Syncing...</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <!-- STEP 0: Universal Open Agentic Web Mesh & Multi-Vertical Switcher -->
+      <section class="wizard-step active" id="step-0">
+        <span class="pill-tag" data-i18n="heroPill">Open Agentic Web Runtime • WebMCP + NANDA + Web Workers</span>
+        <h1 class="gradient-text" data-i18n="heroTitle">Autonomous Multi-Agent Negotiation Mesh on the Open Web</h1>
+        <p class="subtitle" data-i18n="heroSub">
+          Zero platform lock-in. Your browser discovers public *.agent.json manifests, spawns isolated Web Worker sandboxes, and negotiates via asynchronous JSON-RPC 2.0 over MessageChannel.
+        </p>
+
+        <!-- Multi-Vertical Agent Swarm Switcher -->
+        <div style="margin-bottom:8px; font-size:0.78rem; font-weight:700; color:var(--accent-cyan);" data-i18n="switchVerticalLabel">
+          🌐 Switch Agent Mesh Vertical (Same NANDA / WebMCP / Worker Runtime):
+        </div>
+        <div class="vertical-switcher" id="verticalSwitcher">
+          <button type="button" class="vertical-tab active" data-vertical="travel">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; gap:8px;">
+              <strong data-i18n="vertTravelTitle">✈️ Autonomous Travel Mesh</strong>
+              <span class="pill-tag pill-emerald" style="margin-bottom:0;" data-i18n="vertTravelBadge">Flagship Showcase</span>
+            </div>
+            <div style="font-size:0.78rem; color:var(--text-muted);" data-i18n="vertTravelDesc">
+              SkyConnect + StaySmart + CityVibes • Live Open-Meteo weather trade-offs
+            </div>
+          </button>
+
+          <button type="button" class="vertical-tab" data-vertical="compute">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; gap:8px;">
+              <strong data-i18n="vertComputeTitle">🖥️ Decentralized AI Compute &amp; GPU Mesh</strong>
+              <span class="pill-tag" style="margin-bottom:0;" data-i18n="vertComputeBadge">Cross-Domain Proof</span>
+            </div>
+            <div style="font-size:0.78rem; color:var(--text-muted);" data-i18n="vertComputeDesc">
+              GpuSpot (H100s) + StorageVault (NVMe) + CarbonOffset (RECs)
+            </div>
+          </button>
+        </div>
+
+        <!-- Direct Agentic Natural Language & Voice Command Bar -->
+        <div class="intent-bar">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+            <strong style="font-size:0.85rem; color:var(--accent-cyan);" data-i18n="intentTitle">⚡ Direct Agentic Intent Invocation (Text or Voice 🎙️)</strong>
+            <span style="font-size:0.74rem; color:var(--text-muted);" data-i18n="intentHint">Speak or type your request in any language</span>
+          </div>
+          <div class="intent-input-group">
+            <div class="voice-input-wrap" style="flex:1; min-width:240px;">
+              <input type="text" id="naturalIntentInput" style="padding:10px 14px;" data-i18n-placeholder="intentPlaceholder" placeholder="e.g., 6 days in Tokyo from Cairo, luxury, budget $2500" />
+              <button type="button" class="mic-btn" data-voice-target="naturalIntentInput" data-voice-auto-run="true" title="Speak command & execute">🎙️</button>
+            </div>
+            <button class="btn btn-cyan" id="btnRunIntent" style="padding:10px 18px; font-size:0.86rem;" data-i18n="executeIntent">Execute Intent ⚡</button>
+          </div>
+          <div class="preset-chips" id="presetChipsContainer">
+            <button type="button" class="chip-btn" data-intent="6 days in Tokyo from Cairo, luxury, vip, budget $2800" data-i18n="chipTokyo">🇯🇵 Tokyo Luxury VIP</button>
+            <button type="button" class="chip-btn" data-intent="5 days in Dubai from London, balanced, highlights, budget $1850" data-i18n="chipDubai">🇦🇪 Dubai Smart Deal</button>
+            <button type="button" class="chip-btn" data-intent="4 days in Paris from New York, saver, budget $1250" data-i18n="chipParis">🇫🇷 Paris Weekend Saver</button>
+          </div>
+        </div>
+
+        <div class="grid-3" id="heroAgentCards" style="margin-bottom:28px;">
+          <div class="select-card" style="cursor:default;">
+            <span class="pill-tag" id="heroCard1Tag">flights-agent.json</span>
+            <h4 id="heroCard1Title">✈️ SkyConnect</h4>
+            <p id="heroCard1Desc" style="font-size:0.83rem; color:var(--text-muted); margin-top:4px;" data-i18n="cardSkyDesc">Great-circle route discovery &amp; dynamic fare-class counter-offers.</p>
+          </div>
+          <div class="select-card" style="cursor:default;">
+            <span class="pill-tag" id="heroCard2Tag">hotels-agent.json</span>
+            <h4 id="heroCard2Title">🏨 StaySmart</h4>
+            <p id="heroCard2Desc" style="font-size:0.83rem; color:var(--text-muted); margin-top:4px;" data-i18n="cardStayDesc">Multi-night yield negotiation &amp; local cost-of-living indexing.</p>
+          </div>
+          <div class="select-card" style="cursor:default;">
+            <span class="pill-tag" id="heroCard3Tag">activities-agent.json</span>
+            <h4 id="heroCard3Title">🧭 CityVibes</h4>
+            <p id="heroCard3Desc" style="font-size:0.83rem; color:var(--text-muted); margin-top:4px;" data-i18n="cardVibesDesc">Live Open-Meteo weather-aware itinerary &amp; transit pass bundling.</p>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+          <button class="btn btn-primary" id="btnStartWizard" style="padding:14px 28px; font-size:1rem;" data-i18n="getStarted">
+            Configure Step-by-Step →
+          </button>
+          <button class="btn btn-ghost" id="btnHeroSimulateA2A" style="padding:14px 20px; font-size:0.9rem;" data-i18n="testA2ABtn">
+            🤖 Test External Agent-to-Agent Call
+          </button>
+        </div>
+      </section>
+
+      <!-- STEP 1: Origin & Destination / Cluster Region -->
+      <section class="wizard-step" id="step-1">
+        <h2 id="step1Heading" data-i18n="step1Title">Where are you flying from &amp; to?</h2>
+        <p class="subtitle" data-i18n="step1Sub">Select a preset hub, type, or click the mic 🎙️ to speak any city worldwide.</p>
+
+        <div class="route-input-row">
+          <div>
+            <label id="originLabelEl" style="display:block; font-size:0.82rem; font-weight:600; color:var(--text-muted); margin-bottom:6px;" data-i18n="originLabel">Origin City</label>
+            <div class="voice-input-wrap">
+              <input type="text" id="originInput" value="London" style="padding:11px 14px; font-size:0.95rem;" placeholder="London, New York, Cairo..." />
+              <button type="button" class="mic-btn" data-voice-target="originInput" title="Speak Origin">🎙️</button>
+            </div>
+          </div>
+
+          <button type="button" class="swap-btn" id="btnSwapCities" title="Swap Origin and Destination" aria-label="Swap">⇄</button>
+
+          <div>
+            <label id="destLabelEl" style="display:block; font-size:0.82rem; font-weight:600; color:var(--text-muted); margin-bottom:6px;" data-i18n="destLabel">Destination City</label>
+            <div class="voice-input-wrap">
+              <input type="text" id="destInput" value="Tokyo" style="padding:11px 14px; font-size:0.95rem;" placeholder="Tokyo, Dubai, Paris..." />
+              <button type="button" class="mic-btn" data-voice-target="destInput" title="Speak Destination">🎙️</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="flight-radar-card">
+          <div class="radar-endpoint">
+            <span style="font-size:0.72rem; color:var(--text-muted); text-transform:uppercase;" data-i18n="departureHub">Departure Hub</span>
+            <span class="radar-iata mono" id="radarOrigCode">LON</span>
+            <span style="font-size:0.8rem; color:var(--text-muted);" id="radarOrigName">London</span>
+          </div>
+
+          <div style="text-align:center;">
+            <svg width="100%" height="58" viewBox="0 0 260 58" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#6366f1" />
+                  <stop offset="50%" stop-color="#22d3ee" />
+                  <stop offset="100%" stop-color="#10b981" />
+                </linearGradient>
+              </defs>
+              <line x1="20" y1="46" x2="240" y2="46" stroke="var(--glass-border)" stroke-width="1" stroke-dasharray="3 3" />
+              <path d="M 20 46 Q 130 2 240 46" fill="none" stroke="url(#arcGrad)" stroke-width="2.5" stroke-dasharray="5 3" />
+              <circle cx="20" cy="46" r="4.5" fill="#6366f1" />
+              <circle cx="240" cy="46" r="4.5" fill="#10b981" />
+              <text x="130" y="21" text-anchor="middle" font-size="14" id="radarEmoji">✈️</text>
+            </svg>
+            <div class="mono" style="font-size:0.76rem; color:var(--accent-cyan);" id="radarMetrics">~9,559 km • ~12h</div>
+          </div>
+
+          <div class="radar-endpoint" style="text-align:right;">
+            <span style="font-size:0.72rem; color:var(--text-muted); text-transform:uppercase;" data-i18n="arrivalHub">Arrival Hub</span>
+            <span class="radar-iata mono" id="radarDestCode">TYO</span>
+            <span style="font-size:0.8rem; color:var(--text-muted);" id="radarDestName">Tokyo</span>
+          </div>
+        </div>
+
+        <div style="font-size:0.82rem; font-weight:600; color:var(--text-muted); margin-bottom:10px;" data-i18n="popularHubs">Popular Open Web Hubs (Click to select destination):</div>
+        <div class="grid-3" id="destPresetCards">
+          <div class="select-card" data-city="Dubai">
+            <span class="pill-tag">UAE • DXB</span>
+            <h4 data-i18n="cityDubai">Dubai</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;" data-i18n="hubDubaiDesc">Modern desert metropolis &amp; global transit hub</p>
+          </div>
+          <div class="select-card selected" data-city="Tokyo">
+            <span class="pill-tag">Japan • TYO</span>
+            <h4 data-i18n="cityTokyo">Tokyo</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;" data-i18n="hubTokyoDesc">High-speed rail, culinary craft &amp; neon districts</p>
+          </div>
+          <div class="select-card" data-city="Paris">
+            <span class="pill-tag">France • PAR</span>
+            <h4 data-i18n="cityParis">Paris</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;" data-i18n="hubParisDesc">Art museums, architecture &amp; cafe boulevards</p>
+          </div>
+          <div class="select-card" data-city="Cairo">
+            <span class="pill-tag">Egypt • CAI</span>
+            <h4 data-i18n="cityCairo">Cairo</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;" data-i18n="hubCairoDesc">Ancient wonders, Nile heritage &amp; high-value stays</p>
+          </div>
+          <div class="select-card" data-city="New York">
+            <span class="pill-tag">USA • NYC</span>
+            <h4 data-i18n="cityNyc">New York</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;" data-i18n="hubNycDesc">Iconic skyline, Broadway &amp; museum mile</p>
+          </div>
+          <div class="select-card" data-city="London">
+            <span class="pill-tag">UK • LON</span>
+            <h4 data-i18n="cityLondon">London</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;" data-i18n="hubLondonDesc">Historic landmarks, West End &amp; Thames culture</p>
+          </div>
+        </div>
+
+        <div class="wizard-footer">
+          <button class="btn btn-ghost" data-prev="0" data-i18n="back">← Back</button>
+          <button class="btn btn-primary" id="btnStep1Next" data-i18n="next">Continue →</button>
+        </div>
+      </section>
+
+      <!-- STEP 2: Duration -->
+      <section class="wizard-step" id="step-2">
+        <h2 data-i18n="step2Title">How many days is your journey?</h2>
+        <p class="subtitle" data-i18n="step2Sub">Duration dynamically scales multi-day volume discounts across isolated worker peers.</p>
+
+        <div class="summary-box" style="text-align:center; padding:32px 20px;">
+          <div style="font-size:2.6rem; font-weight:800; color:var(--accent-cyan);" id="daysDisplay">5 Days</div>
+          <div style="font-size:0.95rem; color:var(--text-muted); margin-top:4px;" id="nightsDisplay">4 Hotel Nights • 5-Day City Pass Window</div>
+          <input type="range" id="daysSlider" min="2" max="14" value="5" />
+          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:0.78rem; color:var(--text-muted);">
+            <span data-i18n="weekendSprint">2 Days (Weekend Sprint)</span>
+            <span data-i18n="oneWeek">7 Days (1 Week)</span>
+            <span data-i18n="extendedExp">14 Days (Extended Expedition)</span>
+          </div>
+        </div>
+
+        <div class="wizard-footer">
+          <button class="btn btn-ghost" data-prev="1" data-i18n="back">← Back</button>
+          <button class="btn btn-primary" data-next="3" data-i18n="next">Continue →</button>
+        </div>
+      </section>
+
+      <!-- STEP 3: Comfort / Capacity Tier -->
+      <section class="wizard-step" id="step-3">
+        <h2 id="step3Heading" data-i18n="step3Title">Select your travel comfort tier</h2>
+        <p class="subtitle" data-i18n="step3Sub">Guides capacity and quality tier during isolated Web Worker A2A negotiation.</p>
+
+        <div class="grid-3" id="tierCards">
+          <div class="select-card" data-tier="saver">
+            <span class="pill-tag" id="tierSaverTag" data-i18n="tierSaverTag">3★ Hotels • Economy</span>
+            <h3 id="tierSaverTitle" data-i18n="tierSaverTitle">Saver</h3>
+            <p id="tierSaverDesc" style="font-size:0.84rem; color:var(--text-muted); margin-top:6px;" data-i18n="tierSaverDesc">
+              Smart unbundled economy fares + clean central 3-star boutique stays.
+            </p>
+          </div>
+          <div class="select-card selected" data-tier="balanced">
+            <span class="pill-tag pill-emerald" id="tierBalTag" data-i18n="tierBalTag">4★ Hotels • Standard+</span>
+            <h3 id="tierBalTitle" data-i18n="tierBalTitle">Balanced</h3>
+            <p id="tierBalDesc" style="font-size:0.84rem; color:var(--text-muted); margin-top:6px;" data-i18n="tierBalDesc">
+              Checked baggage included + top-rated 4-star hotels with breakfast.
+            </p>
+          </div>
+          <div class="select-card" data-tier="luxury">
+            <span class="pill-tag pill-amber" id="tierLuxTag" data-i18n="tierLuxTag">5★ Suites • Business</span>
+            <h3 id="tierLuxTitle" data-i18n="tierLuxTitle">Luxury</h3>
+            <p id="tierLuxDesc" style="font-size:0.84rem; color:var(--text-muted); margin-top:6px;" data-i18n="tierLuxDesc">
+              Priority lie-flat/business cabin + 5-star flagship hospitality.
+            </p>
+          </div>
+        </div>
+
+        <div class="wizard-footer">
+          <button class="btn btn-ghost" data-prev="2" data-i18n="back">← Back</button>
+          <button class="btn btn-primary" data-next="4" data-i18n="next">Continue →</button>
+        </div>
+      </section>
+
+      <!-- STEP 4: Add-ons -->
+      <section class="wizard-step" id="step-4">
+        <h2 id="step4Heading" data-i18n="step4Title">Choose experience &amp; transfer add-ons</h2>
+        <p class="subtitle" data-i18n="step4Sub">Peer agent adapts add-ons to live destination telemetry.</p>
+
+        <div class="grid-3" id="addonCards">
+          <div class="select-card" data-addon="none">
+            <span class="pill-tag" data-i18n="addonNoneTag">Independent Explorer</span>
+            <h3 id="addonNoneTitle" data-i18n="addonNoneTitle">Flights + Hotel Only</h3>
+            <p id="addonNoneDesc" style="font-size:0.84rem; color:var(--text-muted); margin-top:6px;" data-i18n="addonNoneDesc">
+              Zero bundled excursions; full freedom to explore at your own pace.
+            </p>
+          </div>
+          <div class="select-card selected" data-addon="highlights">
+            <span class="pill-tag pill-emerald" data-i18n="addonHighTag">Most Popular</span>
+            <h3 id="addonHighTitle" data-i18n="addonHighTitle">City Highlights Pass + Transfers</h3>
+            <p id="addonHighDesc" style="font-size:0.84rem; color:var(--text-muted); margin-top:6px;" data-i18n="addonHighDesc">
+              Airport express transfers + skip-the-line museum &amp; transit pass.
+            </p>
+          </div>
+          <div class="select-card" data-addon="vip">
+            <span class="pill-tag pill-amber" data-i18n="addonVipTag">Concierge Curated</span>
+            <h3 id="addonVipTitle" data-i18n="addonVipTitle">All-Inclusive VIP</h3>
+            <p id="addonVipDesc" style="font-size:0.84rem; color:var(--text-muted); margin-top:6px;" data-i18n="addonVipDesc">
+              Private chauffeur transfers, guided excursions &amp; tasting reservations.
+            </p>
+          </div>
+        </div>
+
+        <div class="wizard-footer">
+          <button class="btn btn-ghost" data-prev="3" data-i18n="back">← Back</button>
+          <button class="btn btn-primary" id="btnStep4Next" data-i18n="next">Continue →</button>
+        </div>
+      </section>
+
+      <!-- STEP 5: Dynamic Budget Cap -->
+      <section class="wizard-step" id="step-5">
+        <h2 data-i18n="step5Title">Set your autonomous budget ceiling</h2>
+        <p class="subtitle" data-i18n="step5Sub">Dynamic slider bounds calibrated to real-time route distance and market baseline.</p>
+
+        <div class="summary-box">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;">
+            <span style="font-size:0.85rem; color:var(--text-muted);" data-i18n="targetBudgetCap">Target Budget Cap</span>
+            <span style="font-size:2.2rem; font-weight:800; color:var(--accent-emerald);" id="budgetDisplay">$2,400</span>
+          </div>
+
+          <input type="range" id="budgetSlider" min="1500" max="4000" value="2400" />
+
+          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:0.78rem; color:var(--text-muted); margin-bottom:18px;">
+            <span><span data-i18n="minBaseline">Min (82% Baseline):</span> <strong id="budgetMinLabel">$1,968</strong></span>
+            <span><span data-i18n="marketBaseline">Market Baseline:</span> <strong id="budgetBaselineLabel">$2,400</strong></span>
+            <span><span data-i18n="maxBaseline">Max (175% Baseline):</span> <strong id="budgetMaxLabel">$4,200</strong></span>
+          </div>
+
+          <div class="stat-row">
+            <span data-i18n="routeDistance">Route &amp; Distance</span>
+            <strong id="summaryRoute">London → Tokyo</strong>
+          </div>
+          <div class="stat-row">
+            <span data-i18n="durationTier">Duration &amp; Tier</span>
+            <strong id="summaryTier">5 Days (4 Nights) • Balanced</strong>
+          </div>
+          <div class="stat-row">
+            <span data-i18n="liveWeather">Live Destination Weather</span>
+            <strong id="summaryWeather">Syncing Open-Meteo...</strong>
+          </div>
+        </div>
+
+        <div class="wizard-footer">
+          <button class="btn btn-ghost" data-prev="4" data-i18n="back">← Back</button>
+          <button class="btn btn-cyan" id="btnStartNegotiation" data-i18n="launchAgents">Launch Worker A2A Negotiation ⚡</button>
+        </div>
+      </section>
+
+      <!-- STEP 6: Live Isolated Web Worker A2A Execution & Concession Telemetry -->
+      <section class="wizard-step" id="step-6">
+        <h2 data-i18n="step6Title">Live Isolated Web Worker A2A Negotiation</h2>
+
+        <div class="flow-banner">
+          <span class="mono" style="color:var(--accent-cyan);" id="meshParticipantsBanner">User Orchestrator ⇄ SkyConnect • StaySmart • CityVibes</span>
+          <span class="mono" id="flowStateLabel">INITIALIZING...</span>
+        </div>
+
+        <div class="mesh-visual-box">
+          <svg width="100%" height="92" viewBox="0 0 600 92" preserveAspectRatio="xMidYMid meet">
+            <line id="line-flights" class="mesh-line" x1="300" y1="22" x2="110" y2="74" />
+            <line id="line-hotels" class="mesh-line" x1="300" y1="22" x2="300" y2="74" />
+            <line id="line-activities" class="mesh-line" x1="300" y1="22" x2="490" y2="74" />
+            <rect x="200" y="4" width="200" height="26" rx="13" fill="#4f46e5" />
+            <text x="300" y="21" text-anchor="middle" fill="#ffffff" font-size="10.5" font-family="JetBrains Mono, monospace" font-weight="600">Orchestrator (MessageChannel)</text>
+            <circle cx="110" cy="76" r="8" fill="#22d3ee" />
+            <text id="svgNode1Label" x="110" y="62" text-anchor="middle" fill="currentColor" font-size="10" font-family="JetBrains Mono, monospace">Worker: SkyConnect</text>
+            <circle cx="300" cy="76" r="8" fill="#22d3ee" />
+            <text id="svgNode2Label" x="300" y="62" text-anchor="middle" fill="currentColor" font-size="10" font-family="JetBrains Mono, monospace">Worker: StaySmart</text>
+            <circle cx="490" cy="76" r="8" fill="#22d3ee" />
+            <text id="svgNode3Label" x="490" y="62" text-anchor="middle" fill="currentColor" font-size="10" font-family="JetBrains Mono, monospace">Worker: CityVibes</text>
+          </svg>
+        </div>
+
+        <div class="grid-3" id="agentStatusGrid">
+          <div class="select-card" style="cursor:default;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong id="cardAgent1Name">✈️ SkyConnect</strong>
+              <span class="agent-status status-IDLE" id="status-flights">IDLE</span>
+            </div>
+            <div style="font-size:1.35rem; font-weight:800; margin-top:10px;" id="price-flights">—</div>
+            <div style="font-size:0.76rem; color:var(--text-muted);" id="meta-flights" data-i18n="isolatedWorkerLabel">Isolated Blob Worker</div>
+          </div>
+
+          <div class="select-card" style="cursor:default;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong id="cardAgent2Name">🏨 StaySmart</strong>
+              <span class="agent-status status-IDLE" id="status-hotels">IDLE</span>
+            </div>
+            <div style="font-size:1.35rem; font-weight:800; margin-top:10px;" id="price-hotels">—</div>
+            <div style="font-size:0.76rem; color:var(--text-muted);" id="meta-hotels" data-i18n="isolatedWorkerLabel">Isolated Blob Worker</div>
+          </div>
+
+          <div class="select-card" style="cursor:default;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong id="cardAgent3Name">🧭 CityVibes</strong>
+              <span class="agent-status status-IDLE" id="status-activities">IDLE</span>
+            </div>
+            <div style="font-size:1.35rem; font-weight:800; margin-top:10px;" id="price-activities">—</div>
+            <div style="font-size:0.76rem; color:var(--text-muted);" id="meta-activities" data-i18n="isolatedWorkerLabel">Isolated Blob Worker</div>
+          </div>
+
+          <div class="select-card" id="card-custom" style="cursor:default; display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong id="name-custom">🛡️ EcoShield</strong>
+              <span class="agent-status status-IDLE" id="status-custom">IDLE</span>
+            </div>
+            <div style="font-size:1.35rem; font-weight:800; margin-top:10px;" id="price-custom">—</div>
+            <div style="font-size:0.76rem; color:var(--text-muted);" id="meta-custom" data-i18n="isolatedWorkerLabel">Isolated Blob Worker</div>
+          </div>
+        </div>
+
+        <div class="terminal mono" id="a2aTerminal"></div>
+
+        <div id="resultsPanel" style="display:none; margin-top:22px;">
+          <div class="auto-heal-banner" id="autoHealBanner">
+            <div style="flex:1; min-width:220px;">
+              <strong style="color:var(--accent-amber); font-size:0.9rem;" data-i18n="autoHealTitle">⚠️ Budget Ceiling Exceeded — Autonomous Recovery Ready</strong>
+              <p id="autoHealText" style="font-size:0.8rem; color:var(--text-secondary); margin-top:3px;"></p>
+            </div>
+            <button type="button" class="btn btn-amber" id="btnApplyAutoHeal" style="padding:9px 16px; font-size:0.82rem;" data-i18n="autoHealBtn">
+              ⚡ Auto-Heal &amp; Re-Negotiate
+            </button>
+          </div>
+
+          <!-- Digital Agentic Boarding Pass / Cluster Allocation Receipt -->
+          <div class="boarding-pass">
+            <div class="boarding-pass-grid">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+                  <span class="pill-tag pill-emerald" style="margin-bottom:0;" data-i18n="lockedDealBadge">A2A AGREEMENT LOCKED • 3 ROUNDS</span>
+                  <span class="mono" style="font-size:0.74rem; color:var(--accent-cyan);" id="passMetaBadge">LON ➔ TYO • ~9,559 km • 1,099 kg CO₂</span>
+                </div>
+                <h3 id="resultHeadline" style="font-size:1.35rem;">Tokyo • 5-Day Autonomous Bundle</h3>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;">
+                  <button type="button" class="control-pill" id="btnCopyAgentLink" style="font-size:0.76rem; color:var(--accent-cyan);" data-i18n="copyAgentLink">
+                    🔗 Copy Shareable Agent Link
+                  </button>
+                  <button type="button" class="control-pill" id="btnSpeakSummary" style="font-size:0.76rem;" data-i18n="readAloud">
+                    🔊 Read Deal Aloud
+                  </button>
+                </div>
+              </div>
+
+              <div style="text-align:end;">
+                <div style="font-size:0.78rem; color:var(--text-muted);" data-i18n="lockedTotalLabel">Locked Negotiated Total</div>
+                <div style="font-size:2.15rem; font-weight:800; color:var(--accent-emerald);" id="resultTotal">$0</div>
+                <div style="font-size:0.82rem; color:var(--accent-cyan); font-weight:600;" id="resultSavings">Saved $0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Protocol & Concessions Telemetry Card (Step 6) -->
+          <div class="summary-box" style="border-color: rgba(34, 211, 238, 0.35);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+              <strong style="font-size:0.9rem; color:var(--accent-cyan);" data-i18n="telemetryCardTitle">📡 Protocol &amp; Multi-Round Concessions Telemetry</strong>
+              <span class="pill-tag pill-emerald" style="margin-bottom:0;" id="protocolEngineBadge">Game-Theoretic Deterministic Fallback</span>
+            </div>
+            <div style="font-size:0.78rem; color:var(--text-muted); margin-bottom:8px;">
+              <strong data-i18n="execSandboxLabel">Execution Sandbox:</strong> <span class="mono" id="protocolModeLabel">Isolated Web Workers + MessageChannel JSON-RPC 2.0</span>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="concession-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="tblPeerAgent">Peer Worker Agent</th>
+                    <th data-i18n="tblRound1">Round 1 (Initial)</th>
+                    <th data-i18n="tblRound2">Round 2 (Counter)</th>
+                    <th data-i18n="tblRound3">Round 3 (Locked)</th>
+                    <th data-i18n="tblConcession">Concession</th>
+                  </tr>
+                </thead>
+                <tbody id="concessionMatrixBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="summary-box">
+            <div class="savings-bar-track" title="Negotiated Cost Distribution">
+              <div class="seg-flights" id="bar-flights" style="width:45%;"></div>
+              <div class="seg-hotels" id="bar-hotels" style="width:35%;"></div>
+              <div class="seg-activities" id="bar-activities" style="width:20%;"></div>
+              <div class="seg-custom" id="bar-custom" style="width:0%;"></div>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:14px; font-size:0.74rem; color:var(--text-muted); margin-bottom:14px;">
+              <span data-i18n="legendFlights">🟣 Primary Peer</span>
+              <span data-i18n="legendHotels">🔵 Secondary Peer</span>
+              <span data-i18n="legendExp">🟢 Add-on Peer</span>
+              <span id="legend-custom" style="display:none;">🟠 EcoShield</span>
+            </div>
+
+            <div id="llmSummaryBox" style="display:none; background:rgba(99,102,241,0.12); border:1px solid rgba(99,102,241,0.3); border-radius:10px; padding:12px; margin-bottom:14px; font-size:0.85rem;"></div>
+
+            <div style="margin-top:8px;">
+              <strong style="font-size:0.88rem; color:var(--accent-cyan);" data-i18n="itineraryHeading">Autonomous Execution Plan &amp; Telemetry Adaptation:</strong>
+              <ul id="itineraryList" style="margin-top:8px; padding-inline-start:20px; font-size:0.85rem; color:var(--text-secondary); display:grid; gap:6px;"></ul>
+            </div>
+
+            <div class="receipt-bar mono">
+              <span>🔐 NANDA SHA-256: <strong id="auditHashDisplay">computing...</strong></span>
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <button type="button" class="control-pill" id="btnTogglePrivacyAudit" style="padding:3px 10px; font-size:0.73rem; color:var(--accent-emerald);" data-i18n="trustAuditBtn">
+                  🛡️ Trust Boundary Audit
+                </button>
+                <button type="button" class="control-pill" id="btnToggleWebMcpSnippet" style="padding:3px 10px; font-size:0.73rem; color:var(--accent-cyan);" data-i18n="webMcpBtn">
+                  🔌 Agent API / WebMCP
+                </button>
+              </div>
+            </div>
+            <pre class="manifest-pre" id="privacyAuditBox" style="display:none; margin-top:10px;"></pre>
+            <pre class="manifest-pre" id="webMcpSnippetBox" style="display:none; margin-top:10px;"></pre>
+          </div>
+
+          <div style="margin-top:24px;">
+            <h3 style="font-size:1.1rem; margin-bottom:6px;" data-i18n="upgradesHeading">✨ Upgrade &amp; Get More (Autonomous Counter-Offers)</h3>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;" data-i18n="upgradesSub">
+              One-click parameter adjustments that trigger an instant A2A re-negotiation cycle:
+            </p>
+            <div class="grid-3" id="smartUpgradesGrid"></div>
+          </div>
+
+          <div class="wizard-footer">
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="btn btn-ghost" data-prev="5" data-i18n="adjustBudgetBtn">← Adjust Budget</button>
+              <button class="btn btn-ghost" id="btnDownloadJsonStep6" data-i18n="downloadJson">Download Agreement Bundle (.json)</button>
+            </div>
+            <button class="btn btn-emerald" data-next="7" data-i18n="proceedBookingBtn">Proceed to Handover Hub →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 7: Verified Booking & NANDA Offer Token Handover Hub -->
+      <section class="wizard-step" id="step-7">
+        <span class="pill-tag pill-emerald" data-i18n="step7Pill">Human-in-the-Loop Authorization • NANDA Offer Tokens + HTTPS Deep-Links</span>
+        <h2 data-i18n="step7Title">Verified Provider Handover &amp; NANDA Offer Tokens</h2>
+        <p class="subtitle" data-i18n="step7Sub">
+          Your browser runtime never stores payment credentials. Hand off directly to each provider with signed NANDA Offer Tokens appended to verified HTTPS links.
+        </p>
+
+        <div class="grid-3" id="checkoutCards" style="margin-bottom:24px;"></div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+          <button class="btn btn-cyan" id="btnOpenAllProviders" data-i18n="openAll3">Open All Providers 🚀</button>
+          <button class="btn btn-primary" id="btnDownloadJsonStep7" data-i18n="downloadJson">Download Agreement Bundle (.json)</button>
+        </div>
+
+        <div class="wizard-footer">
+          <button class="btn btn-ghost" data-prev="6" data-i18n="backResultsBtn">← Back to Results</button>
+          <button class="btn btn-ghost" id="btnRestart" data-i18n="startNewTripBtn">Start New Session ↻</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module">
+    import {
+      OpenAgenticWebRuntime,
+      WORLD_LANGUAGES,
+      BUILTIN_ECO_AGENT_MANIFEST,
+      CITY_PRESETS,
+      decodeOfferToken
+    } from "./runtime.js";
+
+    const runtime = new OpenAgenticWebRuntime();
+    const $ = (id) => document.getElementById(id);
+    let currentAutoHealPatch = null;
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    // Populate Language Selector with All 75+ World Languages
+    const langSelect = $("langSelect");
+    WORLD_LANGUAGES.forEach((l) => {
+      const opt = document.createElement("option");
+      opt.value = l.code;
+      opt.textContent = l.label;
+      langSelect.appendChild(opt);
+    });
+
+    function getCurrentLangMeta() {
+      return WORLD_LANGUAGES.find((l) => l.code === runtime.state.lang) || WORLD_LANGUAGES[0];
+    }
+
+    // =========================================================================
+    // MULTI-VERTICAL UI SYNCHRONIZATION (TRAVEL VS. DECENTRALIZED AI COMPUTE)
+    // =========================================================================
+    function syncVerticalUI() {
+      const isCompute = runtime.state.vertical === "compute";
+
+      document.querySelectorAll("#verticalSwitcher .vertical-tab").forEach((tab) => {
+        tab.classList.toggle("active", tab.getAttribute("data-vertical") === runtime.state.vertical);
+      });
+
+      if (isCompute) {
+        if (!$("naturalIntentInput").value.trim() || $("naturalIntentInput").dataset.autoFilled === "true") {
+          $("naturalIntentInput").value = runtime.t("computeDefaultIntent");
+          $("naturalIntentInput").dataset.autoFilled = "true";
+        }
+        $("presetChipsContainer").innerHTML = `
+          <button type="button" class="chip-btn" data-intent="6 days in Tokyo from us-east-1, luxury, vip, budget $4800">${escapeHtml(runtime.t("chipGpu8x"))}</button>
+          <button type="button" class="chip-btn" data-intent="5 days in Dubai from eu-central-1, balanced, highlights, budget $2100">${escapeHtml(runtime.t("chipGpu4x"))}</button>
+          <button type="button" class="chip-btn" data-intent="4 days in Paris from us-west-2, saver, budget $950">${escapeHtml(runtime.t("chipGpu2x"))}</button>
+        `;
+        $("heroCard1Tag").textContent = "gpuspot-agent.json";
+        $("heroCard1Title").textContent = "🖥️ GpuSpot H100";
+        $("heroCard1Desc").textContent = runtime.t("cardGpuDesc");
+        $("heroCard2Tag").textContent = "storagevault-agent.json";
+        $("heroCard2Title").textContent = "💾 StorageVault NVMe";
+        $("heroCard2Desc").textContent = runtime.t("cardStorageDesc");
+        $("heroCard3Tag").textContent = "carbonoffset-agent.json";
+        $("heroCard3Title").textContent = "🌱 CarbonOffset";
+        $("heroCard3Desc").textContent = runtime.t("cardCarbonDesc");
+
+        $("step1Heading").textContent = runtime.t("step1ComputeTitle");
+        $("originLabelEl").textContent = runtime.t("originZoneLabel");
+        $("destLabelEl").textContent = runtime.t("destRegionLabel");
+        $("radarEmoji").textContent = "🖥️";
+        $("step3Heading").textContent = runtime.t("step3ComputeTitle");
+        $("tierSaverTag").textContent = runtime.t("tierComputeSaverTag");
+        $("tierSaverTitle").textContent = runtime.t("tierComputeSaverTitle");
+        $("tierSaverDesc").textContent = runtime.t("tierComputeSaverDesc");
+        $("tierBalTag").textContent = runtime.t("tierComputeBalTag");
+        $("tierBalTitle").textContent = runtime.t("tierComputeBalTitle");
+        $("tierBalDesc").textContent = runtime.t("tierComputeBalDesc");
+        $("tierLuxTag").textContent = runtime.t("tierComputeLuxTag");
+        $("tierLuxTitle").textContent = runtime.t("tierComputeLuxTitle");
+        $("tierLuxDesc").textContent = runtime.t("tierComputeLuxDesc");
+
+        $("step4Heading").textContent = runtime.t("step4ComputeTitle");
+        $("addonNoneTitle").textContent = runtime.t("addonComputeNoneTitle");
+        $("addonNoneDesc").textContent = runtime.t("addonComputeNoneDesc");
+        $("addonHighTitle").textContent = runtime.t("addonComputeHighTitle");
+        $("addonHighDesc").textContent = runtime.t("addonComputeHighDesc");
+        $("addonVipTitle").textContent = runtime.t("addonComputeVipTitle");
+        $("addonVipDesc").textContent = runtime.t("addonComputeVipDesc");
+
+        $("svgNode1Label").textContent = "Worker: GpuSpot";
+        $("svgNode2Label").textContent = "Worker: StorageVault";
+        $("svgNode3Label").textContent = "Worker: CarbonOffset";
+        $("cardAgent1Name").textContent = "🖥️ GpuSpot";
+        $("cardAgent2Name").textContent = "💾 StorageVault";
+        $("cardAgent3Name").textContent = "🌱 CarbonOffset";
+      } else {
+        if ($("naturalIntentInput").dataset.autoFilled === "true") {
+          $("naturalIntentInput").value = "";
+          $("naturalIntentInput").dataset.autoFilled = "false";
+        }
+        $("presetChipsContainer").innerHTML = `
+          <button type="button" class="chip-btn" data-intent="6 days in Tokyo from Cairo, luxury, vip, budget $2800">${escapeHtml(runtime.t("chipTokyo"))}</button>
+          <button type="button" class="chip-btn" data-intent="5 days in Dubai from London, balanced, highlights, budget $1850">${escapeHtml(runtime.t("chipDubai"))}</button>
+          <button type="button" class="chip-btn" data-intent="4 days in Paris from New York, saver, budget $1250">${escapeHtml(runtime.t("chipParis"))}</button>
+        `;
+        $("heroCard1Tag").textContent = "flights-agent.json";
+        $("heroCard1Title").textContent = "✈️ SkyConnect";
+        $("heroCard1Desc").textContent = runtime.t("cardSkyDesc");
+        $("heroCard2Tag").textContent = "hotels-agent.json";
+        $("heroCard2Title").textContent = "🏨 StaySmart";
+        $("heroCard2Desc").textContent = runtime.t("cardStayDesc");
+        $("heroCard3Tag").textContent = "activities-agent.json";
+        $("heroCard3Title").textContent = "🧭 CityVibes";
+        $("heroCard3Desc").textContent = runtime.t("cardVibesDesc");
+
+        $("step1Heading").textContent = runtime.t("step1Title");
+        $("originLabelEl").textContent = runtime.t("originLabel");
+        $("destLabelEl").textContent = runtime.t("destLabel");
+        $("radarEmoji").textContent = "✈️";
+        $("step3Heading").textContent = runtime.t("step3Title");
+        $("tierSaverTag").textContent = runtime.t("tierSaverTag");
+        $("tierSaverTitle").textContent = runtime.t("tierSaverTitle");
+        $("tierSaverDesc").textContent = runtime.t("tierSaverDesc");
+        $("tierBalTag").textContent = runtime.t("tierBalTag");
+        $("tierBalTitle").textContent = runtime.t("tierBalTitle");
+        $("tierBalDesc").textContent = runtime.t("tierBalDesc");
+        $("tierLuxTag").textContent = runtime.t("tierLuxTag");
+        $("tierLuxTitle").textContent = runtime.t("tierLuxTitle");
+        $("tierLuxDesc").textContent = runtime.t("tierLuxDesc");
+
+        $("step4Heading").textContent = runtime.t("step4Title");
+        $("addonNoneTitle").textContent = runtime.t("addonNoneTitle");
+        $("addonNoneDesc").textContent = runtime.t("addonNoneDesc");
+        $("addonHighTitle").textContent = runtime.t("addonHighTitle");
+        $("addonHighDesc").textContent = runtime.t("addonHighDesc");
+        $("addonVipTitle").textContent = runtime.t("addonVipTitle");
+        $("addonVipDesc").textContent = runtime.t("addonVipDesc");
+
+        $("svgNode1Label").textContent = "Worker: SkyConnect";
+        $("svgNode2Label").textContent = "Worker: StaySmart";
+        $("svgNode3Label").textContent = "Worker: CityVibes";
+        $("cardAgent1Name").textContent = "✈️ SkyConnect";
+        $("cardAgent2Name").textContent = "🏨 StaySmart";
+        $("cardAgent3Name").textContent = "🧭 CityVibes";
+      }
+
+      document.querySelectorAll("#presetChipsContainer .chip-btn").forEach((chip) => {
+        chip.addEventListener("click", async () => {
+          const intentStr = chip.getAttribute("data-intent");
+          $("naturalIntentInput").value = intentStr;
+          $("naturalIntentInput").dataset.autoFilled = "false";
+          const parsed = await runtime.parseNaturalIntent(intentStr);
+          await window.NexusTravelAgent.invoke(parsed);
+        });
+      });
+
+      $("originInput").value = runtime.state.origin;
+      $("destInput").value = runtime.state.destination;
+      updateManifestCounterUI();
+      updateStep1Radar();
+      updateWeatherBadge();
+    }
+
+    // =========================================================================
+    // UNIVERSAL WEB SPEECH API ENGINE
+    // =========================================================================
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    function showVoiceToast(text, durationMs = 3200) {
+      const toast = $("voiceToast");
+      $("voiceToastText").textContent = text;
+      toast.classList.add("show");
+      if (durationMs > 0) {
+        clearTimeout(toast._timer);
+        toast._timer = setTimeout(() => toast.classList.remove("show"), durationMs);
+      }
+    }
+
+    function startVoiceCapture({ triggerBtn, onTranscript }) {
+      if (!SpeechRecognition) {
+        showVoiceToast(runtime.t("voiceUnsupported"), 4000);
+        return;
+      }
+
+      const langMeta = getCurrentLangMeta();
+      const recognition = new SpeechRecognition();
+      recognition.lang = langMeta.bcp47 || "en-US";
+      recognition.interimResults = true;
+      recognition.maxAlternatives = 1;
+
+      if (triggerBtn) triggerBtn.classList.add("recording");
+      showVoiceToast(`🎙️ ${runtime.t("listening")} (${langMeta.label})...`, 0);
+
+      let finalTranscript = "";
+
+      recognition.onresult = (event) => {
+        let interim = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const piece = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalTranscript += piece;
+          } else {
+            interim += piece;
+          }
+        }
+        const liveText = (finalTranscript || interim).trim();
+        if (liveText) {
+          showVoiceToast(`🎙️ "${liveText}"`, 0);
+        }
+      };
+
+      recognition.onerror = (event) => {
+        if (triggerBtn) triggerBtn.classList.remove("recording");
+        showVoiceToast(`⚠ ${runtime.t("voiceError")}: ${event.error}`, 3000);
+      };
+
+      recognition.onend = () => {
+        if (triggerBtn) triggerBtn.classList.remove("recording");
+        const clean = finalTranscript.trim();
+        if (clean) {
+          showVoiceToast(`✓ "${clean}"`, 2600);
+          onTranscript(clean);
+        } else {
+          $("voiceToast").classList.remove("show");
+        }
+      };
+
+      recognition.start();
+    }
+
+    // =========================================================================
+    // THEME ENGINE
+    // =========================================================================
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("nexustravel-theme", theme);
+      $("btnToggleTheme").textContent = theme === "dark" ? runtime.t("themeLight") : runtime.t("themeDark");
+    }
+
+    const savedTheme =
+      localStorage.getItem("nexustravel-theme") ||
+      (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    applyTheme(savedTheme);
+
+    $("btnToggleTheme").addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      applyTheme(current === "dark" ? "light" : "dark");
+    });
+
+    // =========================================================================
+    // UNIVERSAL TRANSLATION & RTL/LTR ENGINE
+    // =========================================================================
+    async function applyTranslations() {
+      const lang = runtime.state.lang;
+      const meta = getCurrentLangMeta();
+
+      await runtime.ensureLanguageDictionary(lang, (loading) => {
+        if (loading) {
+          showVoiceToast(`🌐 ${runtime.t("translatingProgress")} ${meta.label}...`, 0);
+        } else {
+          showVoiceToast(`✓ ${meta.label}`, 1800);
+        }
+      });
+
+      document.documentElement.lang = lang;
+      document.documentElement.dir = meta.rtl ? "rtl" : "ltr";
+
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        el.textContent = runtime.t(key);
+      });
+
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        el.setAttribute("placeholder", runtime.t(key));
+      });
+
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      $("btnToggleTheme").textContent = currentTheme === "dark" ? runtime.t("themeLight") : runtime.t("themeDark");
+      $("llmStatusText").textContent = runtime.state.llmKey
+        ? `LLM: ${runtime.state.llmProvider.toUpperCase()} (${runtime.t("activeWord")})`
+        : runtime.t("llmDet");
+
+      syncVerticalUI();
+      updateDaysDisplay();
+      updateManifestCounterUI();
+
+      if (runtime.state.step === 5) syncBudgetStepUI();
+      if (runtime.state.step === 6 && runtime.state.negotiationResult) {
+        renderNegotiationResults(runtime.state.negotiationResult);
+      }
+      if (runtime.state.step === 7) renderCheckoutHub();
+    }
+
+    function updateDaysDisplay() {
+      const d = runtime.state.days;
+      $("daysDisplay").textContent = `${d} ${runtime.t("daysWord")}`;
+      $("nightsDisplay").textContent =
+        runtime.state.vertical === "compute"
+          ? `${d * 24} ${runtime.t("clusterHoursWord")} • ${d}-${runtime.t("slaWindowWord")}`
+          : `${d - 1} ${runtime.t("nightsWord")} • ${d}-${runtime.t("passWindowWord")}`;
+    }
+
+    function updateManifestCounterUI() {
+      const count = Object.keys(runtime.manifests).length;
+      $("manifestCountLabel").textContent = `${runtime.t("inspectManifests")} (${count})`;
+
+      const peers = runtime.getPeerManifestsByRole();
+      const baseNames = `${peers.flights.agent.name.split(" ")[0]} • ${peers.hotels.agent.name.split(" ")[0]} • ${peers.activities.agent.name.split(" ")[0]}`;
+      const custom = runtime.state.customAgent;
+
+      if (custom) {
+        $("card-custom").style.display = "block";
+        $("legend-custom").style.display = "inline";
+        $("name-custom").textContent = `🛡️ ${custom.agent?.name?.split(" ")[0] || "CustomPeer"}`;
+        $("meshParticipantsBanner").textContent =
+          `Orchestrator ⇄ ${baseNames} • ${custom.agent?.name?.split(" ")[0] || "CustomPeer"}`;
+      } else {
+        $("meshParticipantsBanner").textContent = `Orchestrator ⇄ ${baseNames}`;
+      }
+    }
+
+    function updateStep1Radar() {
+      const origName = $("originInput").value.trim() || "London";
+      const destName = $("destInput").value.trim() || "Tokyo";
+      const o = CITY_PRESETS[origName];
+      const d = CITY_PRESETS[destName];
+      const oCode = o ? o.iata.toUpperCase() : origName.slice(0, 6).toUpperCase();
+      const dCode = d ? d.iata.toUpperCase() : destName.slice(0, 3).toUpperCase();
+
+      $("radarOrigCode").textContent = oCode;
+      $("radarOrigName").textContent = origName;
+      $("radarDestCode").textContent = dCode;
+      $("radarDestName").textContent = destName;
+
+      if (runtime.state.vertical === "compute") {
+        $("radarMetrics").textContent = `${runtime.state.days * 24} GPU-Hours • NVLink Mesh`;
+      } else if (o && d) {
+        const km = runtime.haversineKm(o.lat, o.lon, d.lat, d.lon);
+        const hrs = Math.max(1, Math.round(km / 810));
+        $("radarMetrics").textContent = `~${km.toLocaleString()} km • ~${hrs}h • ${d.costIndex}x`;
+      } else {
+        $("radarMetrics").textContent = runtime.t("telemetryReady");
+      }
+    }
+
+    function goToStep(stepNum) {
+      runtime.state.step = stepNum;
+      document.querySelectorAll(".wizard-step").forEach((sec) => sec.classList.remove("active"));
+      const target = $(`step-${stepNum}`);
+      if (target) target.classList.add("active");
+
+      const progressWrap = $("progressWrap");
+      if (stepNum === 0) {
+        progressWrap.classList.remove("active");
+      } else {
+        progressWrap.classList.add("active");
+        $("progressLabel").textContent = `${stepNum} / 7`;
+        $("progressFill").style.width = `${Math.round((stepNum / 7) * 100)}%`;
+      }
+
+      if (stepNum === 1) updateStep1Radar();
+      if (stepNum === 2) updateDaysDisplay();
+      if (stepNum === 5) syncBudgetStepUI();
+      if (stepNum === 7) renderCheckoutHub();
+    }
+
+    function updateWeatherBadge() {
+      const w = runtime.state.weather;
+      const dest = runtime.state.geoDest?.name || runtime.state.destination;
+      if (!w) return;
+      const text = `${dest}: ${w.tempC}°C • ${w.windKmh} km/h`;
+      $("weatherBadge").textContent = text;
+      $("summaryWeather").textContent =
+        runtime.state.vertical === "compute"
+          ? `${text} (${runtime.t("datacenterCoolingNote")})`
+          : `${text} (${w.isRainy ? runtime.t("indoorModeLabel") : runtime.t("outdoorModeLabel")})`;
+    }
+
+    function syncBudgetStepUI() {
+      const est = runtime.recalculateBaseline();
+      const slider = $("budgetSlider");
+      slider.min = runtime.state.minBudgetUsd;
+      slider.max = runtime.state.maxBudgetUsd;
+      slider.value = runtime.state.budgetUsd;
+
+      $("budgetDisplay").textContent = runtime.formatMoney(runtime.state.budgetUsd);
+      $("budgetMinLabel").textContent = runtime.formatMoney(runtime.state.minBudgetUsd);
+      $("budgetBaselineLabel").textContent = runtime.formatMoney(runtime.state.baselineUsd);
+      $("budgetMaxLabel").textContent = runtime.formatMoney(runtime.state.maxBudgetUsd);
+
+      $("summaryRoute").textContent =
+        runtime.state.vertical === "compute"
+          ? `${runtime.state.origin} → ${runtime.state.geoDest.name} (${runtime.t("gpuRegionWord")})`
+          : `${runtime.state.geoOrigin.name} → ${runtime.state.geoDest.name} (~${est.distKm.toLocaleString()} km)`;
+      $("summaryTier").textContent = `${runtime.state.days} ${runtime.t("daysWord")} • ${runtime.state.tier.toUpperCase()} • ${runtime.state.addon.toUpperCase()}`;
+      updateWeatherBadge();
+    }
+
+    function renderManifestDrawer() {
+      const container = $("manifestListContainer");
+      container.innerHTML = "";
+      Object.entries(runtime.manifests).forEach(([filename, json]) => {
+        const block = document.createElement("div");
+        block.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong class="mono" style="color:var(--accent-cyan);">${escapeHtml(filename)}</strong>
+            <span class="pill-tag pill-emerald">peer_policy: ${escapeHtml(json.agent?.peer_policy || "open")}</span>
+          </div>
+          <pre class="manifest-pre">${escapeHtml(JSON.stringify(json, null, 2))}</pre>
+        `;
+        container.appendChild(block);
+      });
+      updateManifestCounterUI();
+    }
+
+    async function executeNegotiationFlow() {
+      goToStep(6);
+      $("resultsPanel").style.display = "none";
+      $("autoHealBanner").style.display = "none";
+      $("privacyAuditBox").style.display = "none";
+      $("webMcpSnippetBox").style.display = "none";
+      $("a2aTerminal").innerHTML = "";
+
+      const activeKeys = runtime.state.customAgent
+        ? ["flights", "hotels", "activities", "custom"]
+        : ["flights", "hotels", "activities"];
+
+      activeKeys.forEach((k) => {
+        const badge = $(`status-${k}`);
+        badge.className = "agent-status status-IDLE";
+        badge.textContent = "IDLE";
+        $(`price-${k}`).textContent = "—";
+        $(`meta-${k}`).textContent = runtime.t("isolatedWorkerLabel");
+        const line = $(`line-${k}`);
+        if (line) line.setAttribute("class", "mesh-line");
+      });
+
+      const result = await runtime.runA2ANegotiation({
+        onFlow: (text) => {
+          $("flowStateLabel").textContent = text;
+        },
+        onAgentState: (agentKey, status, usdAmount) => {
+          const badge = $(`status-${agentKey}`);
+          if (badge) {
+            badge.className = `agent-status status-${status}`;
+            badge.textContent = status;
+          }
+          const priceEl = $(`price-${agentKey}`);
+          if (priceEl) priceEl.textContent = runtime.formatMoney(usdAmount);
+          const metaEl = $(`meta-${agentKey}`);
+          if (metaEl) {
+            metaEl.textContent = status === "LOCKED" ? runtime.t("workerLockedLabel") : "Worker JSON-RPC 2.0...";
+          }
+          const line = $(`line-${agentKey}`);
+          if (line) {
+            line.setAttribute("class", status === "LOCKED" ? "mesh-line locked" : "mesh-line active");
+          }
+        },
+        onLog: (entry) => {
+          const term = $("a2aTerminal");
+          const line = document.createElement("div");
+          line.className = "log-line";
+          const actorClass = entry.actor.startsWith("ROUND") ? "log-round" : "log-actor";
+          line.innerHTML = `<span style="color:#64748b;">[${escapeHtml(entry.ts)}]</span> <span class="${actorClass}">${escapeHtml(entry.actor)}:</span> ${escapeHtml(entry.msg)}`;
+          term.appendChild(line);
+          term.scrollTop = term.scrollHeight;
+        }
+      });
+
+      renderNegotiationResults(result);
+    }
+
+    function renderNegotiationResults(res) {
+      $("resultsPanel").style.display = "block";
+      const oCode =
+        runtime.state.vertical === "compute"
+          ? runtime.state.origin.toUpperCase()
+          : (runtime.state.geoOrigin.iata || "LON").toUpperCase();
+      const dCode = (runtime.state.geoDest.iata || "TYO").toUpperCase();
+
+      $("passMetaBadge").textContent =
+        runtime.state.vertical === "compute"
+          ? `${oCode} ➔ ${dCode} • ${runtime.state.days * 24} GPU-Hrs • ${res.co2Kg} kg CO₂`
+          : `${oCode} ➔ ${dCode} • ~${res.distKm.toLocaleString()} km • ${res.co2Kg.toLocaleString()} kg CO₂`;
+
+      $("resultHeadline").textContent =
+        runtime.state.vertical === "compute"
+          ? `${runtime.state.geoDest.name} (${runtime.t("gpuRegionWord")}) • ${runtime.state.days} ${runtime.t("daysWord")}`
+          : `${runtime.state.geoDest.name} • ${runtime.state.days} ${runtime.t("daysWord")}`;
+
+      $("resultTotal").textContent = runtime.formatMoney(res.negotiated.total);
+      $("resultSavings").textContent = `${runtime.t("savedWord")} ${runtime.formatMoney(res.savingsUsd)} (${runtime.formatMoney(res.market.total)})`;
+      $("auditHashDisplay").textContent = res.auditHash ? `${res.auditHash.slice(0, 20)}...` : "verified";
+
+      // Protocol & Concessions Telemetry Card
+      $("protocolEngineBadge").textContent = res.reasoningEngine || runtime.t("detEngineBadge");
+      $("protocolModeLabel").textContent = res.executionMode || "Isolated Web Workers + MessageChannel JSON-RPC 2.0";
+
+      const matrixBody = $("concessionMatrixBody");
+      matrixBody.innerHTML = "";
+      (res.concessionMatrix || []).forEach((row) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${escapeHtml(row.name)}</strong>${row.counterBidTriggered ? ` <span class="pill-tag pill-amber" style="margin:0; font-size:0.62rem;">${escapeHtml(runtime.t("counterBidBadge"))}</span>` : ""}</td>
+          <td>${escapeHtml(runtime.formatMoney(row.round1Usd))}</td>
+          <td>${escapeHtml(runtime.formatMoney(row.round2Usd))}</td>
+          <td style="color:var(--accent-emerald); font-weight:700;">${escapeHtml(runtime.formatMoney(row.round3Usd))}</td>
+          <td style="color:var(--accent-cyan);">-${escapeHtml(String(row.discountPct))}%</td>
+        `;
+        matrixBody.appendChild(tr);
+      });
+
+      if (res.autoHealPlan) {
+        currentAutoHealPatch = res.autoHealPlan.patch;
+        $("autoHealText").textContent = res.autoHealPlan.reason;
+        $("autoHealBanner").style.display = "flex";
+      } else {
+        currentAutoHealPatch = null;
+        $("autoHealBanner").style.display = "none";
+      }
+
+      const tot = Math.max(1, res.negotiated.total);
+      $("bar-flights").style.width = `${Math.round((res.negotiated.flights / tot) * 100)}%`;
+      $("bar-hotels").style.width = `${Math.round((res.negotiated.hotels / tot) * 100)}%`;
+      $("bar-activities").style.width = `${Math.round((res.negotiated.activities / tot) * 100)}%`;
+      $("bar-custom").style.width = `${Math.round((res.negotiated.custom / tot) * 100)}%`;
+
+      $("privacyAuditBox").textContent = JSON.stringify(
+        {
+          nanda_privacy_enforcement: "ACTIVE",
+          worker_sandbox_isolation: "Blob URL + MessageChannel JSON-RPC 2.0",
+          https_handoff_enforcement: "STRICT_TLS_ONLY",
+          filtered_sensitive_keys: ["payment_credentials", "passport_number", "ssh_private_keys", "llm_api_keys"],
+          per_agent_quote_signatures: res.quote_signatures,
+          nanda_offer_tokens: res.offer_tokens
+        },
+        null,
+        2
+      );
+
+      $("webMcpSnippetBox").textContent =
+`// Invoke NexusTravel autonomously from any external browser agent or WebMCP client:
+const bundle = await window.NexusTravelAgent.invoke({
+  vertical: "${runtime.state.vertical}",
+  origin: "${runtime.state.vertical === "compute" ? runtime.state.origin : runtime.state.geoOrigin.name}",
+  destination: "${runtime.state.geoDest.name}",
+  days: ${runtime.state.days},
+  tier: "${runtime.state.tier}",
+  addon: "${runtime.state.addon}",
+  budgetUsd: ${runtime.state.budgetUsd}
+});`;
+
+      const llmBox = $("llmSummaryBox");
+      if (res.llmSummary) {
+        llmBox.style.display = "block";
+        llmBox.innerHTML = `<strong>🧠 ${escapeHtml(runtime.t("strategyHeading"))} (${escapeHtml(res.reasoningEngine)}):</strong><div style="margin-top:6px; white-space:pre-line;">${escapeHtml(res.llmSummary)}</div>`;
+      } else {
+        llmBox.style.display = "none";
+      }
+
+      const list = $("itineraryList");
+      list.innerHTML = "";
+      res.itinerary.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        list.appendChild(li);
+      });
+
+      const upgradesGrid = $("smartUpgradesGrid");
+      upgradesGrid.innerHTML = "";
+      res.upgrades.forEach((upg) => {
+        const card = document.createElement("div");
+        card.className = "select-card";
+        card.style.cursor = "default";
+        card.innerHTML = `
+          <span class="pill-tag pill-amber">${escapeHtml(upg.badge)}</span>
+          <h4 style="font-size:0.98rem;">${escapeHtml(upg.title)}</h4>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin:6px 0 12px;">${escapeHtml(upg.description)}</p>
+          <div style="font-size:0.85rem; font-weight:700; color:var(--accent-cyan); margin-bottom:10px;">
+            +${runtime.formatMoney(upg.deltaUsd)}
+          </div>
+          <button class="btn btn-primary" style="width:100%; padding:8px 12px; font-size:0.82rem;">
+            ${escapeHtml(runtime.t("applyUpgradeBtn"))}
+          </button>
+        `;
+        card.querySelector("button").addEventListener("click", async () => {
+          Object.assign(runtime.state, upg.patch);
+          runtime.state.budgetUsd = upg.newBudgetUsd;
+          $("daysSlider").value = runtime.state.days;
+          updateDaysDisplay();
+          await executeNegotiationFlow();
+        });
+        upgradesGrid.appendChild(card);
+      });
+    }
+
+    function openOfferTokenVerifier(agentTitle, tokenStr, handoffUrl) {
+      const decoded = decodeOfferToken(tokenStr);
+      $("tokenVerifyOutput").textContent = JSON.stringify(
+        {
+          provider: agentTitle,
+          verification_status: decoded?.validStructure ? "VALID_NANDA_OFFER_TOKEN" : "INVALID_TOKEN",
+          handoff_url_with_token: handoffUrl,
+          decoded_claims: decoded?.payload || null,
+          detached_signature_b64url: decoded?.signature || null
+        },
+        null,
+        2
+      );
+      $("tokenVerifyDrawer").classList.add("open");
+    }
+
+    function renderCheckoutHub() {
+      const res = runtime.state.negotiationResult;
+      if (!res) return;
+      const dest = runtime.state.geoDest.name;
+      const sigs = res.quote_signatures || {};
+      const tokens = res.offer_tokens || {};
+      const peers = runtime.getPeerManifestsByRole();
+
+      const cards = [
+        {
+          title: runtime.state.vertical === "compute" ? `🖥️ ${peers.flights.agent.name}` : runtime.t("checkoutFlightsTitle"),
+          price: runtime.formatMoney(res.negotiated.flights),
+          sub: `${runtime.state.vertical === "compute" ? runtime.state.origin : runtime.state.geoOrigin.name} → ${dest} (${runtime.state.tier.toUpperCase()})`,
+          url: res.bookingLinks.flights,
+          sig: sigs.flights,
+          token: tokens.flights,
+          cta: runtime.state.vertical === "compute" ? "Lambda Cloud ↗" : "Skyscanner ↗"
+        },
+        {
+          title: runtime.state.vertical === "compute" ? `💾 ${peers.hotels.agent.name}` : runtime.t("checkoutHotelsTitle"),
+          price: runtime.formatMoney(res.negotiated.hotels),
+          sub:
+            runtime.state.vertical === "compute"
+              ? `${runtime.state.days} ${runtime.t("daysWord")} NVMe • ${dest}`
+              : `${res.nights} ${runtime.t("nightsWord")} • ${dest}`,
+          url: res.bookingLinks.hotels,
+          sig: sigs.hotels,
+          token: tokens.hotels,
+          cta: runtime.state.vertical === "compute" ? "Backblaze B2 ↗" : "Expedia ↗"
+        },
+        {
+          title: runtime.state.vertical === "compute" ? `🌱 ${peers.activities.agent.name}` : runtime.t("checkoutActivitiesTitle"),
+          price: runtime.formatMoney(res.negotiated.activities),
+          sub: `${runtime.state.days} ${runtime.t("daysWord")} • ${runtime.state.addon.toUpperCase()}`,
+          url: res.bookingLinks.activities,
+          sig: sigs.activities,
+          token: tokens.activities,
+          cta: runtime.state.vertical === "compute" ? "Gold Standard RECs ↗" : "GetYourGuide ↗"
+        }
+      ];
+
+      if (runtime.state.customAgent && res.negotiated.custom > 0) {
+        cards.push({
+          title: `🛡️ ${runtime.state.customAgent.agent?.name || "EcoShield Protection"}`,
+          price: runtime.formatMoney(res.negotiated.custom),
+          sub: `${runtime.state.days} ${runtime.t("daysWord")} • CO₂ & SLA Shield`,
+          url: res.bookingLinks.custom,
+          sig: sigs.custom,
+          token: tokens.custom,
+          cta: "Gold Standard ↗"
+        });
+      }
+
+      const container = $("checkoutCards");
+      container.innerHTML = "";
+      cards.forEach((c) => {
+        let safeHref = null;
+        try {
+          safeHref = runtime.validateHttpsUrl(c.url);
+        } catch (_) {
+          safeHref = null;
+        }
+
+        const shortSig = c.sig ? `${c.sig.slice(0, 12)}…` : "verified";
+        const el = document.createElement("div");
+        el.className = "select-card";
+        el.style.cursor = "default";
+        el.innerHTML = `
+          <h4>${escapeHtml(c.title)}</h4>
+          <div style="font-size:1.6rem; font-weight:800; color:var(--accent-emerald); margin:8px 0;">${escapeHtml(c.price)}</div>
+          <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:10px;">${escapeHtml(c.sub)}</p>
+          <div class="sig-receipt-pill mono" title="SHA-256 Quote Signature: ${escapeHtml(c.sig || "")}">
+            <span>🔐 SHA-256: ${escapeHtml(shortSig)}</span>
+            <button type="button" class="verify-token-btn" style="background:none; border:none; color:var(--accent-cyan); font-weight:700; cursor:pointer; font-size:0.7rem; text-decoration:underline; font-family:inherit;">
+              ${escapeHtml(runtime.t("verifyTokenBtn"))}
+            </button>
+          </div>
+          ${
+            safeHref
+              ? `<a href="${escapeHtml(safeHref)}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="width:100%; font-size:0.84rem;">${escapeHtml(c.cta)}</a>`
+              : `<button type="button" class="btn btn-ghost" disabled style="width:100%; font-size:0.8rem; color:var(--accent-rose);">⚠ Blocked Non-HTTPS URL</button>`
+          }
+        `;
+        el.querySelector(".verify-token-btn").addEventListener("click", () => {
+          openOfferTokenVerifier(c.title, c.token, safeHref);
+        });
+        container.appendChild(el);
+      });
+    }
+
+    function downloadTripJson() {
+      const payload = runtime.exportTripPackage();
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `nexus-${runtime.state.vertical}-${runtime.state.geoDest.name.toLowerCase().replace(/\s+/g, "-")}-a2a.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    async function handleVoiceStepCommand(spokenText) {
+      const lower = spokenText.toLowerCase();
+      const step = runtime.state.step;
+
+      if (lower.includes("next") || lower.includes("continue") || lower.includes("التالي") || lower.includes("كمل")) {
+        if (step === 0) goToStep(1);
+        else if (step === 1) $("btnStep1Next").click();
+        else if (step === 4) $("btnStep4Next").click();
+        else if (step === 5) $("btnStartNegotiation").click();
+        else if (step < 7) goToStep(step + 1);
+        return;
+      }
+
+      if (lower.includes("back") || lower.includes("previous") || lower.includes("رجوع") || lower.includes("ارجع")) {
+        if (step > 0) goToStep(step - 1);
+        return;
+      }
+
+      if (step === 0) {
+        $("naturalIntentInput").value = spokenText;
+        const parsed = await runtime.parseNaturalIntent(spokenText);
+        await window.NexusTravelAgent.invoke(parsed);
+        return;
+      }
+
+      if (step === 1) {
+        const cleanCity = spokenText.replace(/\.$/, "").trim();
+        $("destInput").value = cleanCity;
+        runtime.state.destination = cleanCity;
+        updateStep1Radar();
+        return;
+      }
+
+      if (step === 2) {
+        const numMatch = lower.match(/(\d+)/);
+        if (numMatch) {
+          const d = Math.min(14, Math.max(2, Number(numMatch[1])));
+          runtime.state.days = d;
+          $("daysSlider").value = d;
+          updateDaysDisplay();
+          runtime.recalculateBaseline();
+        }
+        return;
+      }
+
+      if (step === 3) {
+        let chosen = null;
+        if (lower.includes("saver") || lower.includes("economy") || lower.includes("اقتصادي")) chosen = "saver";
+        if (lower.includes("balanced") || lower.includes("standard") || lower.includes("متوازن")) chosen = "balanced";
+        if (lower.includes("luxury") || lower.includes("business") || lower.includes("فاخر")) chosen = "luxury";
+        if (chosen) {
+          document.querySelectorAll("#tierCards .select-card").forEach((c) => {
+            c.classList.toggle("selected", c.getAttribute("data-tier") === chosen);
+          });
+          runtime.state.tier = chosen;
+          runtime.recalculateBaseline();
+        }
+        return;
+      }
+
+      if (step === 4) {
+        let chosen = null;
+        if (lower.includes("none") || lower.includes("only") || lower.includes("بدون")) chosen = "none";
+        if (lower.includes("highlight") || lower.includes("pass") || lower.includes("معالم")) chosen = "highlights";
+        if (lower.includes("vip") || lower.includes("all") || lower.includes("شامل")) chosen = "vip";
+        if (chosen) {
+          document.querySelectorAll("#addonCards .select-card").forEach((c) => {
+            c.classList.toggle("selected", c.getAttribute("data-addon") === chosen);
+          });
+          runtime.state.addon = chosen;
+          runtime.recalculateBaseline();
+        }
+        return;
+      }
+
+      if (step === 5) {
+        const numMatch = lower.match(/(\d+(?:,\d+)?)/);
+        if (numMatch) {
+          const val = Number(numMatch[1].replace(/,/g, ""));
+          const clamped = Math.min(runtime.state.maxBudgetUsd, Math.max(runtime.state.minBudgetUsd, val));
+          runtime.state.budgetUsd = clamped;
+          $("budgetSlider").value = clamped;
+          $("budgetDisplay").textContent = runtime.formatMoney(clamped);
+        }
+        if (lower.includes("launch") || lower.includes("negotiate") || lower.includes("start") || lower.includes("ابدأ")) {
+          $("btnStartNegotiation").click();
+        }
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      await runtime.init();
+      renderManifestDrawer();
+      syncVerticalUI();
+
+      // Multi-Vertical Switcher Handler
+      document.querySelectorAll("#verticalSwitcher .vertical-tab").forEach((tab) => {
+        tab.addEventListener("click", async () => {
+          const v = tab.getAttribute("data-vertical");
+          await runtime.setVertical(v);
+          renderManifestDrawer();
+          syncVerticalUI();
+          showVoiceToast(
+            v === "compute" ? runtime.t("toastComputeSwitched") : runtime.t("toastTravelSwitched"),
+            2500
+          );
+        });
+      });
+
+      document.querySelectorAll(".mic-btn[data-voice-target]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.getAttribute("data-voice-target");
+          const autoRun = btn.getAttribute("data-voice-auto-run") === "true";
+          const inputEl = $(targetId);
+          if (!inputEl) return;
+
+          startVoiceCapture({
+            triggerBtn: btn,
+            onTranscript: async (spoken) => {
+              const cleaned = spoken.replace(/\.$/, "").trim();
+              inputEl.value = cleaned;
+              inputEl.dispatchEvent(new Event("input", { bubbles: true }));
+
+              if (autoRun) {
+                const parsed = await runtime.parseNaturalIntent(cleaned);
+                await window.NexusTravelAgent.invoke(parsed);
+              }
+            }
+          });
+        });
+      });
+
+      $("btnGlobalVoiceStep").addEventListener("click", () => {
+        startVoiceCapture({
+          triggerBtn: $("btnGlobalVoiceStep"),
+          onTranscript: (spoken) => handleVoiceStepCommand(spoken)
+        });
+      });
+
+      $("btnSpeakSummary").addEventListener("click", () => {
+        const res = runtime.state.negotiationResult;
+        if (!res || !("speechSynthesis" in window)) return;
+        window.speechSynthesis.cancel();
+        const langMeta = getCurrentLangMeta();
+        const msg = new SpeechSynthesisUtterance(
+          `${runtime.state.geoDest.name}, ${runtime.state.days} ${runtime.t("daysWord")}: ${runtime.formatMoney(res.negotiated.total)}`
+        );
+        msg.lang = langMeta.bcp47 || "en-US";
+        window.speechSynthesis.speak(msg);
+      });
+
+      $("btnCopyAgentLink").addEventListener("click", async () => {
+        const deepLink = runtime.buildShareableDeepLink();
+        try {
+          await navigator.clipboard.writeText(deepLink);
+          showVoiceToast(runtime.t("toastLinkCopied"), 2800);
+        } catch (_) {
+          showVoiceToast(deepLink, 4500);
+        }
+      });
+
+      $("btnApplyAutoHeal").addEventListener("click", async () => {
+        if (!currentAutoHealPatch) return;
+        Object.assign(runtime.state, currentAutoHealPatch);
+        $("daysSlider").value = runtime.state.days;
+        updateDaysDisplay();
+        await executeNegotiationFlow();
+      });
+
+      window.NexusTravelAgent = {
+        manifestUrl: "./nexustravel.agent.json",
+        getCapabilities: async () => {
+          const res = await fetch("./nexustravel.agent.json").catch(() => null);
+          return res && res.ok ? res.json() : { protocol: "open-agentic-web/1.0", name: "NexusTravel" };
+        },
+        registerAgentManifest: async (urlOrManifest) => {
+          const manifest = await runtime.registerCustomAgent(urlOrManifest);
+          renderManifestDrawer();
+          return manifest;
+        },
+        invoke: async (params = {}) => {
+          if (params.vertical && ["travel", "compute"].includes(params.vertical) && params.vertical !== runtime.state.vertical) {
+            await runtime.setVertical(params.vertical);
+            renderManifestDrawer();
+            syncVerticalUI();
+          }
+          if (params.origin) {
+            runtime.state.origin = String(params.origin);
+            $("originInput").value = runtime.state.origin;
+          }
+          if (params.destination) {
+            runtime.state.destination = String(params.destination);
+            $("destInput").value = runtime.state.destination;
+          }
+          if (params.days) {
+            runtime.state.days = Math.min(14, Math.max(2, Number(params.days)));
+            $("daysSlider").value = runtime.state.days;
+            updateDaysDisplay();
+          }
+          if (["saver", "balanced", "luxury"].includes(params.tier)) {
+            runtime.state.tier = params.tier;
+          }
+          if (["none", "highlights", "vip"].includes(params.addon)) {
+            runtime.state.addon = params.addon;
+          }
+          if (params.currency) {
+            runtime.state.currency = params.currency;
+            $("currencySelect").value = params.currency;
+          }
+          if (params.lang) {
+            runtime.state.lang = params.lang;
+            $("langSelect").value = params.lang;
+            await applyTranslations();
+          }
+
+          await runtime.syncGeographyAndWeather();
+          updateWeatherBadge();
+          runtime.recalculateBaseline();
+
+          if (params.budgetUsd) {
+            runtime.state.budgetUsd = Number(params.budgetUsd);
+          }
+
+          await executeNegotiationFlow();
+          return runtime.exportTripPackage();
+        }
+      };
+
+      try {
+        if (navigator.modelContext && typeof navigator.modelContext.registerTool === "function") {
+          navigator.modelContext.registerTool({
+            name: "negotiate_agentic_mesh_bundle",
+            description: "Spawns isolated Web Worker agents to negotiate travel or AI GPU compute bundles via JSON-RPC 2.0.",
+            inputSchema: {
+              type: "object",
+              properties: {
+                vertical: { type: "string", enum: ["travel", "compute"] },
+                origin: { type: "string" },
+                destination: { type: "string" },
+                days: { type: "number" },
+                tier: { type: "string" },
+                addon: { type: "string" },
+                budgetUsd: { type: "number" }
+              },
+              required: ["origin", "destination"]
+            },
+            execute: (args) => window.NexusTravelAgent.invoke(args)
+          });
+        }
+      } catch (_) {}
+
+      window.addEventListener("message", async (event) => {
+        if (event.data?.type === "NEXUSTRAVEL_A2A_REQUEST") {
+          const result = await window.NexusTravelAgent.invoke(event.data.payload || {});
+          const responseEnvelope = {
+            type: "NEXUSTRAVEL_A2A_RESPONSE",
+            requestId: event.data.requestId,
+            responder_did: "did:web:nexustravel.openweb:orchestrator",
+            result
+          };
+          $("wireResponseOutput").textContent = JSON.stringify(responseEnvelope, null, 2);
+          event.source?.postMessage(responseEnvelope, event.origin || "*");
+        }
+      });
+
+      $("btnHeroSimulateA2A").addEventListener("click", () => $("wireDrawer").classList.add("open"));
+      $("btnCloseWireDrawer").addEventListener("click", () => $("wireDrawer").classList.remove("open"));
+      $("wireDrawer").addEventListener("click", (e) => {
+        if (e.target === $("wireDrawer")) $("wireDrawer").classList.remove("open");
+      });
+
+      $("btnCloseTokenDrawer").addEventListener("click", () => $("tokenVerifyDrawer").classList.remove("open"));
+      $("tokenVerifyDrawer").addEventListener("click", (e) => {
+        if (e.target === $("tokenVerifyDrawer")) $("tokenVerifyDrawer").classList.remove("open");
+      });
+
+      $("btnDispatchWirePayload").addEventListener("click", () => {
+        try {
+          const msgObj = JSON.parse($("wireRequestEditor").value);
+          $("wireResponseOutput").textContent = "// Dispatching over postMessage & spawning isolated Web Workers...";
+          window.postMessage(msgObj, "*");
+        } catch (err) {
+          $("wireResponseOutput").textContent = `// JSON Syntax Error: ${err.message}`;
+        }
+      });
+
+      $("btnRunIntent").addEventListener("click", async () => {
+        const defaultPrompt =
+          runtime.state.vertical === "compute"
+            ? "6 days in Tokyo from us-east-1, luxury, vip, budget $4800"
+            : "6 days in Tokyo from Cairo, luxury, budget $2500";
+        const text = $("naturalIntentInput").value.trim() || defaultPrompt;
+        const parsed = await runtime.parseNaturalIntent(text);
+        await window.NexusTravelAgent.invoke(parsed);
+      });
+
+      $("btnTogglePrivacyAudit").addEventListener("click", () => {
+        const box = $("privacyAuditBox");
+        box.style.display = box.style.display === "none" ? "block" : "none";
+      });
+
+      $("btnToggleWebMcpSnippet").addEventListener("click", () => {
+        const box = $("webMcpSnippetBox");
+        box.style.display = box.style.display === "none" ? "block" : "none";
+      });
+
+      $("btnInjectEcoAgent").addEventListener("click", async () => {
+        const feedback = $("customAgentFeedback");
+        try {
+          await runtime.registerCustomAgent(BUILTIN_ECO_AGENT_MANIFEST);
+          renderManifestDrawer();
+          feedback.style.color = "var(--accent-emerald)";
+          feedback.textContent = runtime.t("ecoAgentSuccess");
+        } catch (err) {
+          feedback.style.color = "var(--accent-rose)";
+          feedback.textContent = `⛔ ${err.message}`;
+        }
+      });
+
+      $("btnLoadCustomUrl").addEventListener("click", async () => {
+        const url = $("customAgentUrlInput").value.trim();
+        const feedback = $("customAgentFeedback");
+        if (!url) return;
+        try {
+          await runtime.registerCustomAgent(url);
+          renderManifestDrawer();
+          feedback.style.color = "var(--accent-emerald)";
+          feedback.textContent = runtime.t("customUrlSuccess");
+        } catch (err) {
+          feedback.style.color = "var(--accent-rose)";
+          feedback.textContent = `⛔ ${err.message}`;
+        }
+      });
+
+      $("btnSwapCities").addEventListener("click", () => {
+        const temp = $("originInput").value;
+        $("originInput").value = $("destInput").value;
+        $("destInput").value = temp;
+        runtime.state.origin = $("originInput").value;
+        runtime.state.destination = $("destInput").value;
+        updateStep1Radar();
+      });
+
+      $("originInput").addEventListener("input", updateStep1Radar);
+      $("destInput").addEventListener("input", updateStep1Radar);
+
+      document.querySelectorAll("#destPresetCards .select-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          const city = card.getAttribute("data-city");
+          if ($("originInput").value.trim().toLowerCase() === city.toLowerCase()) {
+            $("originInput").value = $("destInput").value || "London";
+          }
+          document.querySelectorAll("#destPresetCards .select-card").forEach((c) => c.classList.remove("selected"));
+          card.classList.add("selected");
+          $("destInput").value = city;
+          runtime.state.destination = city;
+          updateStep1Radar();
+        });
+      });
+
+      $("btnStartWizard").addEventListener("click", () => goToStep(1));
+
+      document.querySelectorAll("[data-next]").forEach((btn) => {
+        btn.addEventListener("click", () => goToStep(Number(btn.getAttribute("data-next"))));
+      });
+
+      document.querySelectorAll("[data-prev]").forEach((btn) => {
+        btn.addEventListener("click", () => goToStep(Number(btn.getAttribute("data-prev"))));
+      });
+
+      $("btnStep1Next").addEventListener("click", async () => {
+        const btn = $("btnStep1Next");
+        btn.disabled = true;
+        btn.textContent = runtime.t("syncingBtn");
+        try {
+          runtime.state.origin = $("originInput").value.trim() || "London";
+          runtime.state.destination = $("destInput").value.trim() || "Tokyo";
+          await runtime.syncGeographyAndWeather();
+          updateWeatherBadge();
+          goToStep(2);
+        } finally {
+          btn.disabled = false;
+          btn.textContent = runtime.t("next");
+        }
+      });
+
+      $("daysSlider").addEventListener("input", (e) => {
+        runtime.state.days = Number(e.target.value);
+        updateDaysDisplay();
+        runtime.recalculateBaseline();
+      });
+
+      document.querySelectorAll("#tierCards .select-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          document.querySelectorAll("#tierCards .select-card").forEach((c) => c.classList.remove("selected"));
+          card.classList.add("selected");
+          runtime.state.tier = card.getAttribute("data-tier");
+          runtime.recalculateBaseline();
+        });
+      });
+
+      document.querySelectorAll("#addonCards .select-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          document.querySelectorAll("#addonCards .select-card").forEach((c) => c.classList.remove("selected"));
+          card.classList.add("selected");
+          runtime.state.addon = card.getAttribute("data-addon");
+          runtime.recalculateBaseline();
+        });
+      });
+
+      $("btnStep4Next").addEventListener("click", () => {
+        runtime.recalculateBaseline();
+        runtime.state.budgetUsd = Math.round(runtime.state.baselineUsd * 0.94);
+        goToStep(5);
+      });
+
+      $("budgetSlider").addEventListener("input", (e) => {
+        runtime.state.budgetUsd = Number(e.target.value);
+        $("budgetDisplay").textContent = runtime.formatMoney(runtime.state.budgetUsd);
+      });
+
+      $("btnStartNegotiation").addEventListener("click", executeNegotiationFlow);
+
+      $("btnOpenAllProviders").addEventListener("click", () => {
+        const links = runtime.state.negotiationResult?.bookingLinks;
+        if (!links) return;
+        const candidates = [links.flights, links.hotels, links.activities, links.custom].filter(Boolean);
+        candidates.forEach((candidate) => {
+          try {
+            const safeUrl = runtime.validateHttpsUrl(candidate);
+            window.open(safeUrl, "_blank", "noopener,noreferrer");
+          } catch (_) {}
+        });
+      });
+
+      $("btnDownloadJsonStep6").addEventListener("click", downloadTripJson);
+      $("btnDownloadJsonStep7").addEventListener("click", downloadTripJson);
+      $("btnRestart").addEventListener("click", () => goToStep(0));
+
+      $("currencySelect").addEventListener("change", (e) => {
+        runtime.state.currency = e.target.value;
+        if (runtime.state.step === 5) syncBudgetStepUI();
+        if (runtime.state.step === 6 && runtime.state.negotiationResult) {
+          renderNegotiationResults(runtime.state.negotiationResult);
+        }
+        if (runtime.state.step === 7) renderCheckoutHub();
+      });
+
+      $("langSelect").addEventListener("change", async (e) => {
+        runtime.state.lang = e.target.value;
+        await applyTranslations();
+      });
+
+      $("btnOpenManifests").addEventListener("click", () => $("manifestDrawer").classList.add("open"));
+      $("btnCloseManifests").addEventListener("click", () => $("manifestDrawer").classList.remove("open"));
+      $("manifestDrawer").addEventListener("click", (e) => {
+        if (e.target === $("manifestDrawer")) $("manifestDrawer").classList.remove("open");
+      });
+
+      $("btnToggleLlm").addEventListener("click", () => $("llmPopover").classList.toggle("open"));
+      $("btnCloseLlm").addEventListener("click", () => $("llmPopover").classList.remove("open"));
+      $("btnSaveLlm").addEventListener("click", () => {
+        runtime.state.llmProvider = $("llmProviderSelect").value;
+        runtime.state.llmKey = $("llmKeyInput").value.trim();
+        $("llmStatusText").textContent = runtime.state.llmKey
+          ? `LLM: ${runtime.state.llmProvider.toUpperCase()} (${runtime.t("activeWord")})`
+          : runtime.t("llmDet");
+        $("llmPopover").classList.remove("open");
+      });
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialLang = urlParams.get("lang");
+      const initialCurrency = urlParams.get("currency");
+
+      if (initialCurrency) {
+        runtime.state.currency = initialCurrency;
+        $("currencySelect").value = initialCurrency;
+      }
+      if (initialLang && WORLD_LANGUAGES.some((l) => l.code === initialLang)) {
+        runtime.state.lang = initialLang;
+        $("langSelect").value = initialLang;
+        await applyTranslations();
+      }
+
+      if (urlParams.get("autoRun") === "true") {
+        window.NexusTravelAgent.invoke({
+          vertical: urlParams.get("vertical") || "travel",
+          origin: urlParams.get("origin") || "London",
+          destination: urlParams.get("destination") || "Tokyo",
+          days: urlParams.get("days") || 5,
+          tier: urlParams.get("tier") || "balanced",
+          addon: urlParams.get("addon") || "highlights",
+          budgetUsd: urlParams.get("budgetUsd") || undefined,
+          currency: initialCurrency || "USD",
+          lang: initialLang || "en"
+        });
+      }
+    });
+  </script>
+</body>
+</html>

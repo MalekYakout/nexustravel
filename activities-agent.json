@@ -1,0 +1,35 @@
+{
+  "protocol": "open-agentic-web/1.0",
+  "vertical": "travel",
+  "nanda_compliance": {
+    "portable": true,
+    "inspectable": true,
+    "execution_environment": "isolated-web-worker-sandbox"
+  },
+  "agent": {
+    "id": "did:web:nexustravel.openweb:agents:cityvibes",
+    "name": "CityVibes Local Experience Agent",
+    "version": "3.1.0",
+    "role": "activities",
+    "front_man": "experience_curator_agent",
+    "peer_policy": "open",
+    "trust_boundary": {
+      "requires_user_approval_for_handoff": true,
+      "private_context_filtered": ["payment_credentials", "passport_number"],
+      "max_negotiation_rounds": 3
+    }
+  },
+  "pricing_model": {
+    "kind": "travel_activities",
+    "daily_rate_usd": {
+      "none": 0,
+      "highlights": 48,
+      "vip": 135
+    },
+    "max_autonomous_discount_pct": 15
+  },
+  "handoff": {
+    "provider_name": "GetYourGuide",
+    "url_template": "https://www.getyourguide.com/s/?q={CITY}"
+  }
+}

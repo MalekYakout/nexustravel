@@ -1,0 +1,37 @@
+{
+  "protocol": "open-agentic-web/1.0",
+  "vertical": "travel",
+  "nanda_compliance": {
+    "portable": true,
+    "inspectable": true,
+    "execution_environment": "isolated-web-worker-sandbox"
+  },
+  "agent": {
+    "id": "did:web:nexustravel.openweb:agents:skyconnect",
+    "name": "SkyConnect Flight Negotiator",
+    "version": "3.1.0",
+    "role": "flights",
+    "front_man": "fare_negotiation_coordinator",
+    "peer_policy": "open",
+    "trust_boundary": {
+      "requires_user_approval_for_handoff": true,
+      "private_context_filtered": ["payment_credentials", "passport_number"],
+      "max_negotiation_rounds": 3
+    }
+  },
+  "pricing_model": {
+    "kind": "travel_flights",
+    "base_fare_usd": 240,
+    "per_km_rate_usd": 0.085,
+    "tier_multipliers": {
+      "saver": 0.85,
+      "balanced": 1.15,
+      "luxury": 2.35
+    },
+    "max_autonomous_discount_pct": 16
+  },
+  "handoff": {
+    "provider_name": "Skyscanner",
+    "url_template": "https://www.skyscanner.net/transport/flights/{ORIGIN}/{DEST}/"
+  }
+}
