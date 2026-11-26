@@ -1,12 +1,15 @@
-# NexusTravel — Open Agentic Web Protocol Runtime (v3.0.0)
+# NexusTravel — Open Agentic Web Protocol Runtime (v3.1.0)
 
-**Submission for the Open Agentic Web Challenge (Cognizant AI Lab, MIT Media Lab NANDA, & Mozilla)**
+**WAICY 2026 Submission • AI Showcase Track (High School Division)**  
+**Student:** Malek Mohamed Ibrahim Yakout Khalil  
+**Live Demo:** [https://malekyakout.github.io/nexustravel/](https://malekyakout.github.io/nexustravel/)  
+**Source Code:** [https://github.com/MalekYakout/nexustravel](https://github.com/MalekYakout/nexustravel)  
 
-NexusTravel is a 100% client-side, zero-build **Universal Open Agentic Web Protocol Runtime** built on open web standards. Instead of routing users through closed, commission-heavy intermediaries, NexusTravel runs directly inside the user's browser—discovering public `*.agent.json` manifests, spawning **isolated Web Worker sandboxes**, negotiating via **asynchronous JSON-RPC 2.0 over `MessageChannel`**, and minting **cryptographic NANDA Offer Tokens** for verified provider handoffs.
+NexusTravel is a 100% client-side, zero-build **Universal Open Agentic Web Protocol Runtime** built on open web standards (including NANDA agent manifests, WebMCP, and isolated Web Workers). Instead of routing users through closed, commission-heavy intermediaries, NexusTravel runs directly inside the user's browser—discovering public `*.agent.json` manifests, spawning **isolated Web Worker sandboxes**, negotiating via **asynchronous JSON-RPC 2.0 over `MessageChannel`**, and minting **cryptographic NANDA Offer Tokens** for verified provider handoffs.
 
 ---
 
-## Key Architectural Highlights (v3.0.0)
+## Key Architectural Highlights (v3.1.0)
 
 ### 1. Isolated Web Worker Agent Sandboxes (`MessageChannel` + JSON-RPC 2.0)
 - Every discovered `*.agent.json` peer (`flights-agent.json`, `hotels-agent.json`, `activities-agent.json`, or any dynamically plugged-in external manifest) is instantiated inside its own isolated **Blob Web Worker** sandbox.
@@ -47,7 +50,7 @@ NexusTravel is a 100% client-side, zero-build **Universal Open Agentic Web Proto
 
 ## Quick Start
 
-1. Serve the project directory using any static HTTP server (zero build step required):
+1. Open the live hosted demo directly at **[https://malekyakout.github.io/nexustravel/](https://malekyakout.github.io/nexustravel/)**, or serve the project directory locally using any static HTTP server (zero build step required):
    ```bash
    npx serve .
    # or
